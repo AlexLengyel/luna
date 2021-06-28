@@ -165,7 +165,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2)
 }
 
-AUTH_USER_MODEL = 'user.User'
+# AUTH_USER_MODEL = 'user.User'
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
