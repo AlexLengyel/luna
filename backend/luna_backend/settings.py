@@ -57,8 +57,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://motion.team-5.propulsion-learn.ch",
-    "https://test.motion.team-5.propulsion-learn.ch",
+    "https://luna-sagittarius.propulsion-learn.ch/",
     "http://localhost:8000",
     "http://localhost:3000",
     "http://127.0.0.1:8000",

@@ -6,7 +6,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - .env/dev.env
+      - env/dev.env
     volumes:
       - ./backend:/backend
     command: "tail -f /dev/null"
@@ -19,7 +19,7 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - .env/dev.env
+      - env/dev.env
     volumes:
     - database:/var/lib/postgresql/data
 
