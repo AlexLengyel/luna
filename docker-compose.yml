@@ -21,11 +21,11 @@ services:
     env_file:
       - .env/dev.env
     volumes:
-    - postgres_volume:/var/lib/postgresql/data
+    - database:/var/lib/postgresql/data
 
 
 volumes:
-  postgres_volume:
+  database:
   static-files:
   media-files:
   frontend:
