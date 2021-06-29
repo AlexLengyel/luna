@@ -2,27 +2,28 @@ import { createGlobalStyle } from 'styled-components';
 
 
 export const GlobalStyle = createGlobalStyle`
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        font-family: 'Helvetica', sans-serif;
-        font-weight: 400;
-        color: #4C4C4C;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 400;
+    color: #4C4C4C;
+  }
 
-    html,
-    body,
-    #root {
-        height: 100vh;
-        width: 100%;
-    }
-    
-    #root {
-        display: flex;
-        flex-direction: column;
-    }
+  html,
+  body,
+  #root {
+    height: 100vh;
+    width: 100%;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    background: #F2F2F2;
+  }
 `
 
 export const defaultTheme = {
