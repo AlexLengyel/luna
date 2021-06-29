@@ -6,9 +6,10 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-size: 16px;
+        font-size: 20px;
         font-family: 'Helvetica', sans-serif;
         font-weight: 400;
+        color: #4C4C4C;
     }
 
     html,
@@ -25,7 +26,22 @@ export const GlobalStyle = createGlobalStyle`
 
 export const defaultTheme = {
     // Colors:
-    orangeLuna: `E47D31`,
+    orange: "#E47D31",
+    backgroundWhite: "#FFFFFF",
+    backgroundGrey: "#F8F8F8",
+    red: "#B00000",
+    black: "#000000",
+    nightRider: '#303030',
+    whisper: "#EBEBEB",
+    mediumGrey: "#BBB7B7",
+    mediumGrey60: 'rgb(145, 145, 145, 0.6)',
+    grey: "#7E7E7E",
+    charcoal: "#4A4A4A",
+    dimGrey: "#646363",
+    nobel: '#979797',
+    lightSilver: '#D8D8D8',
+    grey94: '#F0F0F0',
+    yellow: '#F8E71C',
 
     // Sizes
     controlHeight: '40px',
@@ -42,11 +58,11 @@ export const defaultTheme = {
 
     // Text Size
     textSizeXXL: '30px',
-    textSizeXL: '24px',
-    textSizeL: '22px',
-    textSizeM: '15px',
-    textSizeDefault: "16px",
-    textSizeS: '12px',
+    textSizeXL: "24px",
+    textSizeL: "18px",
+    textSizeM: "16px",
+    textSizeS: "14px",
+    textSizeXS: "12px",
 
     // Text Weight
     textWeightThin: '300',
@@ -54,5 +70,6 @@ export const defaultTheme = {
     textWeightMedium: '500',
     textWeightBold: '700'
 }
+
 
 
