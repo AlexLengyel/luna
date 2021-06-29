@@ -5,11 +5,11 @@ import googleplus from "../../Assets/svgs/googleplus.svg"
 import instagram from "../../Assets/svgs/instagram.svg"
 
 const Wrapper = styled.div `
-    height: 12%;
+    height: 10%;
     `
 const Footer = styled.div `
     width: 100vw;
-    height: 12%;
+    height: 10%;
     background-color: ${(props) => props.theme.backgroundWhite};
     position: absolute;
     bottom: 0;
@@ -19,7 +19,7 @@ const Footer = styled.div `
     `
 
 const SocialMediaWrapper = styled.img`
-    height: 6vh;
+    height: 4vh;
     width: auto;
 `
 const NavigationSectionLeft = styled.div`
