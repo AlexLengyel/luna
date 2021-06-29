@@ -11,3 +11,4 @@ class Comment(models.Model):
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(to=User, related_name='comments', on_delete=models.CASCADE)
     review = models.ForeignKey(to=Review, related_name='comments', on_delete=models.CASCADE)
+    liked_by = models.ManyToManyField(to=User, related_name='liked_comments', blank=True)

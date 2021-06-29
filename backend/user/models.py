@@ -1,8 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from comment.models import Comment
-from review.models import Review
 
 
 def user_directory_path(instance, filename):
@@ -10,7 +8,7 @@ def user_directory_path(instance, filename):
 
 
 class User(AbstractUser):
-    REQUIRED_FIELDS = ['email', 'username']
+    REQUIRED_FIELDS = ['email']
     USERNAME_FIELD = 'username'
     email = models.EmailField(unique=True)
     location = models.CharField(max_length=50, blank=True)
@@ -22,8 +20,6 @@ class User(AbstractUser):
     things_i_love = models.JSONField(blank=True, default=list)
     profile_picture = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     profile_banner = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
-    liked_comments = models.ManyToManyField(to=Comment, related_name='liked_by', blank=True)
-    liked_reviews = models.ManyToManyField(to=Review, related_name='liked_by', blank=True)
 
     def __str__(self):
         return self.username

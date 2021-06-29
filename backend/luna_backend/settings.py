@@ -38,17 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Apps
-    'rest_framework',
     # Models
-    'user',
     'restaurant',
     'review',
-    'comment'
-    # 3rd party apps
+    'comment',
+    'category',
+    'openinghours',
+    'user',
+    # Apps
     'rest_framework',
     'drf_yasg',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,15 +56,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://motion.team-5.propulsion-learn.ch",
-    "https://test.motion.team-5.propulsion-learn.ch",
+    "https://luna-sagittarius.propulsion-learn.ch",
     "http://localhost:8000",
     "http://localhost:3000",
     "http://127.0.0.1:8000",
@@ -157,21 +156,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media-files')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'user.User'
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2)
 }
-
-# AUTH_USER_MODEL = 'user.User'
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
