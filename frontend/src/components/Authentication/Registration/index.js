@@ -6,14 +6,25 @@ import { MidWrapper} from "../../../style/GlobalWrappers";
 
 
 const FormWrapper =styled(MidWrapper)`
+/*     display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 85vh ;*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 85vh;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100%;
+    background-color: ${(props) => props.theme.mediumGrey60};
     `
 
-const TabTitle = styled(Title)`
-    margin-top: 50px;
+const TabTitle = styled.h1`
+    color: #4C4C4C;
+    font-size: ${props => props.theme.textSizeXL};
+    margin-top: 3%;
+    margin-bottom: 4%;
+
 
     `
 
@@ -25,9 +36,17 @@ const HorizontalLine = styled.hr `
     border-width: 2px;`
 
 export const InputWrapper = styled.div `
-    display: flex;
+/*     display: flex;
     align-items: center;
-    margin-top: 34px;`
+    margin-top: 34px;
+     */
+    width: 20%;
+    min-width: 200px;
+    font-size: ${props => props.theme.textSizeM};
+    padding: 23px;
+    margin-bottom: 5%;
+
+    `
 
 export const Input = styled(FormInput)`
     font-size: 20px;

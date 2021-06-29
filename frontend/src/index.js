@@ -11,7 +11,7 @@ import {Main} from "./Style/container";
 import Restaurant from "./Pages/Restaurant";
 import Profile from "./Pages/Profile";
 import NavFooter from './Components/footer/index';
-
+import Navigation from './Components/navigation';
 const token = localStorage.getItem("token");
 store.dispatch({type: "setToken", payload: token})
 
@@ -20,7 +20,7 @@ ReactDOM.render(
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyle/>
             <>
-                {/*<Hearder/>*/}
+                <Navigation/>
                 <Main>
                     <Router>
                         <Switch>
