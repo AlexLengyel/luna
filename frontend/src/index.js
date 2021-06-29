@@ -10,6 +10,7 @@ import Home from "./Pages/Home";
 import {Main} from "./Style/container";
 import Restaurant from "./Pages/Restaurant";
 import Profile from "./Pages/Profile";
+import NavFooter from './Components/footer/index';
 
 const token = localStorage.getItem("token");
 store.dispatch({type: "setToken", payload: token})
@@ -30,7 +31,7 @@ ReactDOM.render(
                         </Switch>
                     </Router>
                 </Main>
-                {/*<Footer/>*/}
+                <NavFooter/>
             </>
         </ThemeProvider>
     </Provider>,
