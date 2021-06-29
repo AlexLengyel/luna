@@ -2,6 +2,7 @@ import styled from "styled-components";
 import banner from "../Assets/images/banner.png"
 import RestaurantComponent from "../Components/RestaurantComponent";
 import {Button} from "../Style/GlobalButtons";
+import Title from "../Components/BaseTitle";
 
 const Search = styled.form`
   height: 20vh;
@@ -30,27 +31,6 @@ const Search = styled.form`
   }
 `
 
-const Title = styled.div`
-  height: 10vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  
-  h1 {
-    font-size: ${props => props.theme.textSizeXL};
-    font-weight: ${props => props.theme.textWeightBold};
-  }
-`
-
-const Line = styled.div`
-  height: 3px;
-  width: 270px;
-  margin-top: 3vh;
-  background: ${props => props.theme.orange};
-`
-
 const Restaurants = styled.div`
   height: fit-content;
   width: 80%;
@@ -68,10 +48,7 @@ const Home = () => {
                 <input type="text" placeholder={"Search..."}/>
                 <Button>Search</Button>
             </Search>
-            <Title>
-                <h1>BEST RATED RESTAURANTS</h1>
-                <Line/>
-            </Title>
+            <Title titlename="BEST RATED RESTAURANTS" linelength="270px"/>
             <Restaurants>
                 <RestaurantComponent/>
                 <RestaurantComponent/>
