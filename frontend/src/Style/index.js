@@ -72,6 +72,3 @@ export const defaultTheme = {
     textWeightMedium: '500',
     textWeightBold: '700'
 }
-
-
-

@@ -3,6 +3,7 @@ import banner from "../Assets/images/banner.png"
 import RestaurantComponent from "../Components/RestaurantComponent";
 import {Button} from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
+import {RestaurantsWrapper} from "../Style/container";
 
 const Search = styled.form`
   height: 20vh;
@@ -31,16 +32,6 @@ const Search = styled.form`
   }
 `
 
-const Restaurants = styled.div`
-  height: fit-content;
-  width: 80%;
-  display: flex;
-  padding: 2% 0;
-  margin: 0 10%;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-`
-
 const Home = () => {
     return (
         <>
@@ -48,13 +39,13 @@ const Home = () => {
                 <input type="text" placeholder={"Search..."}/>
                 <Button>Search</Button>
             </Search>
-            <Title titlename="BEST RATED RESTAURANTS" linelength="270px"/>
-            <Restaurants>
+            <Title titlename="BEST RATED RESTAURANTS" linelength="270px" height="10vh"/>
+            <RestaurantsWrapper>
                 <RestaurantComponent/>
                 <RestaurantComponent/>
                 <RestaurantComponent/>
                 <RestaurantComponent/>
-            </Restaurants>
+            </RestaurantsWrapper>
         </>
     )
 }

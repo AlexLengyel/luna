@@ -7,7 +7,6 @@ const Line = styled.div`
     `
     
 const TitleWrapper = styled.div`
-  height: 20vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,9 +18,9 @@ const TitleWrapper = styled.div`
     font-weight: ${props => props.theme.textWeightBold};
   }
 `    
-const Title = ({titlename, linelength}) => {
+const Title = ({titlename, linelength, height='20vh'}) => {
     return(
-        <TitleWrapper>
+        <TitleWrapper style={{height: height}}>
             <h1>{titlename}</h1>
             <Line style={{width: linelength}}/>
         </TitleWrapper>
