@@ -18,6 +18,17 @@ export const RestaurantsWrapper = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
 `
+export const CreateRestaurantWrapper = styled.div`
+  height: fit-content;
+  width: 80%;
+  display: flex;
+  padding: 2% 0;
+  margin: 0 10%;
+  margin-bottom: 2%;
+  justify-content: space-evenly;
+  flex-direction: column;
+  flex-wrap: wrap;
+`
 
 export const ListWrapper = styled.div`
   height: 410px;

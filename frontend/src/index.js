@@ -15,6 +15,7 @@ import Navigation from './Components/navigation';
 import RegistrationPage from './Pages/Registration';
 import Login from './Pages/Login';
 import NewReview from "./Pages/NewReview";
+import CreateRestaurant from './Pages/CreateRestaurant';
 
 const token = localStorage.getItem("token");
 store.dispatch({type: "setToken", payload: token})
@@ -31,6 +32,7 @@ ReactDOM.render(
                             <Route path="/" component={ Home } exact/>
                             <Route path="/login" component={ Login } /> 
                             <Route path="/search" component={ Search } />
+                            <Route path="/createRestaurant" component={ CreateRestaurant } exact/>
                             <Route path="/restaurant" component={ Restaurant } />
                             <Route path="/profile" component={ Profile } />
                             <Route path="/registration" component={ RegistrationPage} />
