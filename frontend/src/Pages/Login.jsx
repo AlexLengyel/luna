@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { Button } from "../Store/GlobalButtons";
+import { Button } from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
 import { BaseInput } from "../Components/BaseInput";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const FormWrapper =styled.div`
     display: flex;
@@ -43,7 +46,7 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const onUsernameChange = (event) => {
-        setEmail(event.target.value);
+        setUsername(event.target.value);
       };
     
     const onPasswordChange = (event) => {
@@ -56,8 +59,28 @@ const Login = () => {
           username: username,
           password: password,
         };
-    
     };
+    //     try {
+    //         const resp = await Axios.post(url, body);
+    //         if (resp.status === 200) {
+    //           setUsername("");
+    //           setPassword("");
+      
+    //           dispatch({
+    //             type: 'auth/login',
+    //             payload: resp.data,
+    //           });
+
+    //           localStorage.setItem("token", resp.data.access);
+    //           history.push("/");
+    //         }
+    //       } catch (err) {
+    //         if (err.response.status === 400) {
+    //           console.log(err.response);
+    //         }
+    //     }
+    // };
+    
     
      
     

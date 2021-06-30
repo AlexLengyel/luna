@@ -12,6 +12,8 @@ import Restaurant from "./Pages/Restaurant";
 import Profile from "./Pages/Profile";
 import NavFooter from './Components/footer/index';
 import Navigation from './Components/navigation';
+import Login from './Pages/Login';
+
 const token = localStorage.getItem("token");
 store.dispatch({type: "setToken", payload: token})
 
@@ -25,6 +27,7 @@ ReactDOM.render(
                     <Router>
                         <Switch>
                             <Route path="/" component={ Home } exact/>
+                            <Route path="/login" component={ Login } /> 
                             <Route path="/search" component={ Search } />
                             <Route path="/restaurant" component={ Restaurant } />
                             <Route path="/profile" component={ Profile } />
