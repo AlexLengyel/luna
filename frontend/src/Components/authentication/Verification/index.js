@@ -110,7 +110,6 @@ const Verification = () =>{
         } */
     };
 
-
     return (
         <VerifyWrapper onSubmit={onSubmitHandler}>
                <Title titlename= 'Verification' linelength='100px' height= '10vh'/>

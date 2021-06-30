@@ -21,7 +21,6 @@ const RegisterButton = styled(Button)`
     width: 200px;
     border-radius: 28px;
     border: none;
-
 `
 
 const RegistrationStart = () =>{

@@ -31,7 +31,6 @@ export const Wrapper = styled.form`
 
 `
 
-
 const Verified = () =>{
 
     const history = useHistory()
