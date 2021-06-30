@@ -141,7 +141,7 @@ const CreateRestaurant = () => {
                     <BaseInput placeholder='' {...register("website", { required: false })}/>
                 </InputWrapper>
                 <InputWrapper><InputTitle>Phone *</InputTitle>
-                    <BaseInput placeholder='' {...register("phone", { required: true })} />
+                    <BaseInput placeholder='' {...register("phone", { required: true })} pattern="[0-9]+"/>
                     <br />{errors.phone && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper><InputTitle>Email</InputTitle>
