@@ -1,6 +1,7 @@
 import banner from "../../Assets/images/banner.png";
 import styled from "styled-components";
 import {Button} from "../../Style/GlobalButtons";
+import StarSystem from "../StarSystem";
 
 const Banner = styled.div`
   height: 25vh;
@@ -31,6 +32,11 @@ const Banner = styled.div`
   }
   .stars {
     display: flex;
+    align-items: center;
+    
+    p {
+      margin-left: 30px;
+    }
   }
 `
 
@@ -69,7 +75,7 @@ const NewReview = () => {
                 <h1>Läderach Chocolatier Suisse</h1>
                 <h2>Chocolatiers & Shops</h2>
                 <div className={"stars"}>
-                    <p>Starts</p>
+                    <StarSystem rating={"7"}/>
                     <p>68 reviews</p>
                 </div>
             </Banner>
