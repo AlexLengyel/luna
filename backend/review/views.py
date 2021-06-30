@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, filters
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from django.contrib.auth import get_user_model
 from rest_framework.pagination import LimitOffsetPagination
@@ -129,3 +129,28 @@ class ListReviewsCommentedByMyUserView(ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Review.objects.filter(comments__user=user).order_by("-created")
+
+
+class ListReviewsView(ListAPIView):
+    """
+        get:
+        List all / searches review
+
+        Use-case:
+        - Base-URL: returns all restaurants, with optional pagination
+            - for pagination, you must include limit and offset parameters in url
+
+        - Search-URL: Searches posts by 'rating', 'user' and 'restaurant'.
+            - must include 'search' parameter in url
+                - ex:
+                https://luna-sagittarius.propulsion-learn.ch/backend/api/reviews/?search=apple
+
+        - Combination: Adds pagination and search functionality together
+            - ex:
+            https://luna-sagittarius.propulsion-learn.ch/backend/api/reviews/?search=apple&limit=25&offset=0
+    """
+    pagination_class = LimitOffsetPagination
+    queryset = Review.objects.all()
+    serializer_class = MainReviewSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['rating', 'user', 'restaurant']

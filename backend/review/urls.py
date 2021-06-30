@@ -1,7 +1,7 @@
 from django.urls import path
 from review.views import CreateReviewView, ListReviewsByRestaurantView, ListReviewsByUserView, \
     RetrieveUpdateDestroyReviewView, ToggleReviewLikesView, ListReviewsLikedByMyUserView, \
-    ListReviewsCommentedByMyUserView
+    ListReviewsCommentedByMyUserView, ListReviewsView
 
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('reviews/<int:pk>/', RetrieveUpdateDestroyReviewView.as_view()),
     path('reviews/like/<int:pk>/', ToggleReviewLikesView.as_view()),
     path('reviews/likes/', ListReviewsLikedByMyUserView.as_view()),
-    path('reviews/comments/', ListReviewsCommentedByMyUserView.as_view())
+    path('reviews/comments/', ListReviewsCommentedByMyUserView.as_view()),
+    path('reviews/', ListReviewsView.as_view())
 ]
