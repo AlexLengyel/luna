@@ -7,11 +7,12 @@ import { CreateRestaurantWrapper } from "../Style/container";
 import { useForm } from "react-hook-form";
 
 
-const InputSection = styled.div `
+const InputSection = styled.form `
     display: grid;
     grid-template-columns: repeat(3, 1fr);  
     grid-template-rows: repeat(4, 1fr);
     column-gap: 2vw;
+    row-gap: 1vw;
     align-items: flex-end;
     margin-top: 5vh;
 `
@@ -65,7 +66,11 @@ const UploadLabel = styled.label`
     font-size: ${(props) => props.theme.textSizeM};
 `
 
-
+const ErrorMessage = styled.span`
+    margin-top: -15px;
+    color: ${props => props.theme.red};
+    font-size: ${(props) => props.theme.textSizeXS};
+`
 
 const CreateRestaurant = () => {
 
@@ -73,19 +78,18 @@ const CreateRestaurant = () => {
         
 	};
 
-    const submitHandler = (event) => {
 
-	};
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
+    const onSubmit = data => console.log(data);
     return(
         <CreateRestaurantWrapper>
             <Title titlename="CREATE NEW RESTAURANT" linelength="200px" height="10vh"/>
-            <InputSection>
+            <InputSection onSubmit={handleSubmit(onSubmit)} id="form1" >
                 <InputWrapper>
                     <SectionTitle>Basic</SectionTitle>
                     <InputTitle>Name *</InputTitle>
-                    <BaseInput placeholder='' required/>
+                    <BaseInput placeholder='' {...register("requiredField", { required: true })} />
+                    <br />{errors.requiredField && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper>
                     <InputTitle>Category *</InputTitle>
@@ -109,10 +113,12 @@ const CreateRestaurant = () => {
                 <InputWrapper> 
                     <SectionTitle>Address</SectionTitle>
                     <InputTitle>Street *</InputTitle>
-                    <BaseInput placeholder='' required/>
+                    <BaseInput placeholder='' {...register("requiredField", { required: true })} />
+                    <br />{errors.requiredField && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper><InputTitle>City *</InputTitle>
-                    <BaseInput placeholder='' required/>
+                    <BaseInput placeholder='' {...register("requiredField", { required: true })} />
+                    <br />{errors.requiredField && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper><InputTitle>Zip</InputTitle>
                     <BaseInput placeholder=''/>
@@ -123,7 +129,8 @@ const CreateRestaurant = () => {
                     <BaseInput placeholder=''/>
                 </InputWrapper>
                 <InputWrapper><InputTitle>Phone *</InputTitle>
-                    <BaseInput placeholder='' required/>
+                    <BaseInput placeholder='' {...register("requiredField", { required: true })} />
+                    <br />{errors.requiredField && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper><InputTitle>Email</InputTitle>
                     <BaseInput placeholder=''/>
@@ -131,7 +138,8 @@ const CreateRestaurant = () => {
                 <InputWrapper>
                     <SectionTitle>Details</SectionTitle>
                     <InputTitle>Opening hours *</InputTitle>
-                    <BaseInput placeholder='' required/>
+                    <BaseInput placeholder='' {...register("requiredField", { required: true })} />
+                    <br />{errors.requiredField && <ErrorMessage>This field is required</ErrorMessage>}<br />
                 </InputWrapper>
                 <InputWrapper><InputTitle>Price level</InputTitle>
                     <SelectInput>
@@ -149,10 +157,10 @@ const CreateRestaurant = () => {
                             CHOOSE A FILE...
                         </UploadLabel>
                     </UploadButton>
-                </InputWrapper>    
+                </InputWrapper>       
             </InputSection>
             <ButtonWrapper>
-                <SubmitButton onclick={submitHandler}>
+                <SubmitButton type="submit" value="Submit" form="form1">
                     Submit
                 </SubmitButton>
             </ButtonWrapper>
