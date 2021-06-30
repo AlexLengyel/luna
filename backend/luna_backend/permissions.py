@@ -7,4 +7,20 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.owner == request.user or request.user.is_admin
+        try:
+            # restaurant
+            return obj.owner == request.user
+        except AttributeError:
+            pass
+
+        try:
+            # review
+            return obj.user == request.user
+        except AttributeError:
+            pass
+
+        try:
+            # user
+            return obj.username == request.user.username
+        except AttributeError:
+            pass

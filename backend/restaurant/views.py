@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from rest_framework import filters
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from django.contrib.auth import get_user_model
@@ -17,7 +18,7 @@ class CreateRestaurantsView(CreateAPIView):
         Create a Restaurant
 
         Body must contain:
-        - name, country, street, city, zip, email,
+        - name, category, country, street, city, zip, email,
     """
     queryset = Restaurant.objects.all()
     serializer_class = MainRestaurantSerializer
@@ -59,3 +60,40 @@ class RetrieveUpdateDestroyRestaurantView(RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = MainRestaurantSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
+
+class ListRestaurantsByUserView(ListAPIView):
+    """
+        get:
+        Get the all the restaurants created by a specific user in chronological order
+     """
+    serializer_class = MainRestaurantSerializer
+    pagination_class = LimitOffsetPagination
+
+    def get_queryset(self):
+        owner_id = self.kwargs["pk"]
+        return Restaurant.objects.filter(owner=owner_id).order_by("-created")
+
+
+class ListRestaurantsByCategoryView(ListAPIView):
+    """
+        get:
+        Get the all the restaurants by category
+     """
+    serializer_class = MainRestaurantSerializer
+    pagination_class = LimitOffsetPagination
+
+    def get_queryset(self):
+        category_id = self.kwargs["pk"]
+        return Restaurant.objects.filter(categories__id=category_id).order_by("-created")
+
+
+class ListBestFourRestaurantsView(ListAPIView):
+    """
+        get:
+        Get the 4 best rated restaurants
+     """
+    serializer_class = MainRestaurantSerializer
+
+    def get_queryset(self):
+        return Restaurant.objects.annotate(average_rating=Avg('reviews__rating')).order_by('-restaurant_average_rating')[:4]

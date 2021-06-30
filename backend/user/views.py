@@ -19,7 +19,7 @@ class RetrieveUpdateMyUserProfileView(RetrieveUpdateAPIView):
        Update Logged in user's profile (partial change)
     """
     serializer_class = MainUserSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAdminUser]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_object(self):
         return User.objects.get(id=self.request.user.id)

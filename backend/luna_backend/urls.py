@@ -69,14 +69,18 @@ urlpatterns = [
                       'backend/api/',
                       include('restaurant.urls')
                   ),
-                  # path(
-                  #     'backend/api/',
-                  #     include('review.urls')
-                  # ),
-                  # path(
-                  #     'backend/api/',
-                  #     include('comment.urls')
-                  # ),
+                  path(
+                      'backend/api/',
+                      include('review.urls')
+                  ),
+                  path(
+                      'backend/api/',
+                      include('comment.urls')
+                  ),
+                  path(
+                      'backend/api/',
+                      include('category.urls')
+                  ),
               ] + static(settings.STATIC_URL,
                          document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
