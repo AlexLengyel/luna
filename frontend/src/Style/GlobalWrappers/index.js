@@ -7,11 +7,14 @@ export const NavTabWrapper = styled.div`
     cursor: pointer;
     `
 
-export const MidWrapper = styled.div `
-    background-color: #F2F2F2;
+export const MidWrapper = styled.form`
     display: flex;
-    width: 100vw;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    height: 85vh;
+    width: 100%;
+    position: fixed;
+    margin-top: 71px;
+    background-color: ${props => props.theme.backgroundLightGrey};
     `
-
