@@ -3,14 +3,9 @@ import { Button } from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
 import { BaseInput } from "../Components/BaseInput";
 import {useState} from 'react';
+import { CreateRestaurantWrapper } from "../Style/container";
 
-const FormWrapper =styled.div`
-    display: flex;
-    height: 80vh;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-`
+
 
 const InputWrapper = styled.div `
     display: grid;  
@@ -19,7 +14,6 @@ const InputWrapper = styled.div `
     width: 80vw;
     margin-top: 5vh;
 `
-
 
 const ButtonWrapper =styled.div`
     max-height: 56px;
@@ -87,29 +81,25 @@ const InputTitle = styled.p`
     padding-top: 5px;
 `
 const UploadLabel = styled.label`
-    color: #FFFFFF;
+    color: ${props => props.theme.backgroundWhite};
     font-size: ${(props) => props.theme.textSizeM};
 `
 
 
 
 const CreateRestaurant = () => {
-    const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
 
 	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
+        
 	};
 
     const submitHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
+
 	};
 
     
     return(
-        <FormWrapper>
+        <CreateRestaurantWrapper>
             <Title titlename="CREATE NEW RESTAURANT" linelength="200px" height="10vh"/>
             <InputWrapper>
                 <SectionTitle>Basic</SectionTitle>
@@ -187,7 +177,7 @@ const CreateRestaurant = () => {
                     Submit
                 </SubmitButton>
             </ButtonWrapper>
-        </FormWrapper>
+        </CreateRestaurantWrapper>
     )
 }
 
