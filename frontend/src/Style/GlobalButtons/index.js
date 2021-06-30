@@ -12,4 +12,8 @@ export const Button = styled.button`
   :hover {
     cursor: pointer;
   }
+  
+  :active {
+    transform: translateY(2px);
+  }
 `
