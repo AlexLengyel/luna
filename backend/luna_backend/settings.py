@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lnoq!clq#gz&ki%okuk-#j+13+0g6)_qjlso58g8&ps3c2(c8&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
-# DEBUG = True
+# DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'comment',
     'category',
     'openinghours',
+    'registration',
     'user',
     # Apps
     'rest_framework',
