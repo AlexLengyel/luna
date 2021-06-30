@@ -26,6 +26,7 @@ export const CreateRestaurantWrapper = styled.div`
   margin: 0 10%;
   margin-bottom: 2%;
   justify-content: space-evenly;
+  flex-direction: column;
   flex-wrap: wrap;
 `
 
