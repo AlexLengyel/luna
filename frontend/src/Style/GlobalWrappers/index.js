@@ -8,26 +8,13 @@ export const NavTabWrapper = styled.div`
     `
 
 export const MidWrapper = styled.form`
-/*     background-color: #F2F2F2;
-    display: flex;
-    width: 100vw;
-    align-items: center;
-    justify-content: flex-start; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    height: 85vh;
     width: 100%;
-    background-color: ${props => props.theme.backgroundGrey};
-
+    position: fixed;
+    margin-top: 71px;
+    background-color: ${props => props.theme.backgroundLightGrey};
     `
-/* const Wrapper = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: flex-start;
-height: 100vh;
-width: 100%;
-background-color: ${props => props.theme.backgroundGrey};
-` */

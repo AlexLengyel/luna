@@ -1,14 +1,16 @@
 import {Route, Switch} from "react-router-dom";
-import Registration from "../Components/authentication/Registration/index";
-import Verification from "../Components/authentication/Verification";
+import RegistrationStart from "../Components/authentication/Registration/index";
+import Verification from "../Components/authentication/Verification/index";
+import Verified from "../Components/authentication/Verified/index";
 
-const Registrationpage = () => {
+const RegistrationPage = () => {
     return(
         <Switch>
-                <Route path="/registration/start" component={ Registration } exact/>
-                <Route path="/registration/validation" component={ Verification } exact/>
-            </Switch>
+                <Route path="/registration/start" component={ RegistrationStart } exact/>
+                <Route path="/registration/verification" component={ Verification } exact/>
+                <Route path="/registration/verified" component={ Verified } exact/>
+        </Switch>
     )
 }
 
-export default Registrationpage;
+export default RegistrationPage;

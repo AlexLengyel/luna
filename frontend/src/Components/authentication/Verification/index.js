@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BaseInput } from "../../../Style/GlobalInput";
 import { Button } from "../../../Style/GlobalButtons";
-
+//import Title from "../../BaseTitle";
 
 const FormGrid =styled.div`
   display: grid;
@@ -29,43 +29,39 @@ const TabTitle = styled.h1`
     margin-bottom: 4%;
     padding-bottom: 15px;
     border-bottom: solid 3px ${props => props.theme.orange};
-    justify-content: center;
 `
 
 
-export const InputWrapper = styled.div `
-    display: flex;
-    width: 65%;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 34px;
-    justify-content: space-between;`
-
 export const RegistrationInput = styled(BaseInput)`
-    font-size: 20px;
-
+    
+    padding: 23px;
 `
 
 const FinishRegButton = styled(Button)`
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 200px;
+    border-radius: 28px;
+    border: none;
+    margin-top: 5%;
+    
 `
 
 const Verification = () =>{
     return (
         <Wrapper>
-            
                  <TabTitle>
                     VERIFICATION
                 </TabTitle>
                 <FormGrid>
-                <InputWrapper>
-                    <BaseInput placeholder='Email address' type='email' required= 'This field is required' />
-                    <BaseInput placeholder='Verification Code' type='text' required= 'This field is required' />
-                    <BaseInput placeholder='Username' type='text' required= 'This field is required' />
-                    <BaseInput placeholder='Location' type='text' required= 'This field is required' />
-                    <BaseInput placeholder='Password' type='password' required= 'This field is required' />
-                    <BaseInput placeholder='Password repeat' type='password' required= 'This field is required' />
-                </InputWrapper>
+                    <RegistrationInput placeholder='Email address' type='email'/>
+                    <RegistrationInput placeholder='Verification Code' type='text' />
+                    <RegistrationInput placeholder='Username' type='text'/>
+                    <RegistrationInput placeholder='Location' type='text'/>
+                    <RegistrationInput placeholder='Password' type='password' />
+                    <RegistrationInput placeholder='Password repeat' type='password' />
                 </FormGrid>
                     <FinishRegButton>
                         Finish Registration
