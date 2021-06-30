@@ -13,7 +13,7 @@ import Profile from "./Pages/Profile";
 import NavFooter from './Components/footer/index';
 import Navigation from './Components/navigation';
 import Login from './Pages/Login';
-import NewReview from "./Components/NewReview";
+import NewReview from "./Pages/NewReview";
 import CreateRestaurant from './Pages/CreateRestaurant';
 
 const token = localStorage.getItem("token");
