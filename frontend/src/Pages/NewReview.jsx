@@ -1,7 +1,9 @@
-import banner from "../../Assets/images/banner.png";
+import banner from "../Assets/images/banner.png";
 import styled from "styled-components";
-import {Button} from "../../Style/GlobalButtons";
-import StarSystem from "../StarSystem";
+import StarSystem from "../Components/StarSystem";
+import {Button} from "../Style/GlobalButtons";
+import StarRating from "../Components/StarRating";
+import Rating from "../Components/StarRating";
 
 const Banner = styled.div`
   height: 25vh;
@@ -46,7 +48,7 @@ const ReviewWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10vh 20%;
+  padding: 5vh 20%;
   
   textarea {
     height: 20vh;
@@ -80,7 +82,7 @@ const NewReview = () => {
                 </div>
             </Banner>
             <ReviewWrapper>
-                <p>Stars system</p>
+                <StarRating/>
                 <textarea  placeholder={"Your review helps others learn about great local businesses. \n" +
                 "\n" +
                 "Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."}/>
