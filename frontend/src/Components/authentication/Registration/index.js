@@ -8,18 +8,9 @@ import Title from "../../BaseTitle";
 
 const FormWrapper =styled(MidWrapper)`
     `
-
-const TabTitle = styled(Title)`/* 
-    font-size: ${props => props.theme.textSizeXL};
-    font-weight: ${props => props.theme.textWeightBold};
-    margin-top: 3%;
-    margin-bottom: 4%;
-    padding-bottom: 15px;
-    border-bottom: solid 3px ${props => props.theme.orange}; */
-`
-
 export const RegInput = styled(BaseInput)`
     padding: 23px;
+    margin-top: 77px;
 `
 
 const RegisterButton = styled(Button)`
@@ -49,7 +40,7 @@ const RegistrationStart = () =>{
             const body = {
                 email
             };
-            history.push('registration/verification')
+            history.push('/registration/verified')
         }
 
         /* try {
@@ -69,8 +60,7 @@ const RegistrationStart = () =>{
 
     return (
         <FormWrapper onSubmit={onSubmitHandler} >
-                <Title titlename= 'REGISTRATION' linelength='180px' height= '10vh' />
-                
+                <Title titlename= 'REGISTRATION' linelength='100px' height= '10vh' />
                 <RegInput type= 'email' placeholder='Email address' onChange={OnEmailChange}>
                 </RegInput>
                 <RegisterButton>
