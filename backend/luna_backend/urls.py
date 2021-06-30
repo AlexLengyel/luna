@@ -45,7 +45,6 @@ urlpatterns = [
                       'backend/api/auth/',
                       include('registration.urls')
                   ),
-
                   path(
                       'backend/api/auth/token/',
                       jwt_views.TokenObtainPairView.as_view(),
