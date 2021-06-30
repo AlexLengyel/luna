@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Button } from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
 import { BaseInput } from "../Components/BaseInput";
+import {useState} from 'react';
 
 const FormWrapper =styled.div`
     display: flex;
@@ -17,7 +18,7 @@ const InputWrapper = styled.div `
     height: 60vh;
     width: 80vw;
     margin-top: 5vh;
-    `
+`
 
 
 const ButtonWrapper =styled.div`
@@ -27,11 +28,17 @@ const ButtonWrapper =styled.div`
     margin-top: 7vh;
 `
 
-const SearchButton = styled(Button)`
+const SubmitButton = styled(Button)`
     width: 14vw;
     min-width: 100px;
     border-radius: 28px;
 `
+const UploadButton = styled(Button)`
+    width: 14vw;
+    min-width: 100px;
+    border-radius: 28px;
+`
+
 const SelectInput = styled.select`
     outline: none;
     margin-bottom: 18px;
@@ -45,7 +52,7 @@ const InputLabel = styled.label`
     display: flex;
     flex-direction: column;
     align-items: space-between;
-    `
+`
 
 const BasicWrapper = styled.div`
     display: grid;
@@ -79,8 +86,28 @@ const InputTitle = styled.p`
     padding-bottom: 5px;
     padding-top: 5px;
 `
+const UploadLabel = styled.label`
+    color: #FFFFFF;
+    font-size: ${(props) => props.theme.textSizeM};
+`
+
+
 
 const CreateRestaurant = () => {
+    const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+
+	const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+		setIsFilePicked(true);
+	};
+
+    const submitHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+		setIsFilePicked(true);
+	};
+
+    
     return(
         <FormWrapper>
             <Title titlename="CREATE NEW RESTAURANT" linelength="200px" height="10vh"/>
@@ -145,17 +172,20 @@ const CreateRestaurant = () => {
                             <option value="$$$">$$$</option>
                         </SelectInput>
                     </InputLabel>
-                    <InputLabel><InputTitle>Image</InputTitle>
-                        <SearchButton >
-                            CHOOSE A FILE...
-                        </SearchButton>
+                    <InputLabel><InputTitle>Image</InputTitle>                       
+                        <UploadButton>
+                            <UploadLabel>
+                                <input hidden type="file" accept="image/png, image/jpg" onChange={changeHandler}/>                    
+                                CHOOSE A FILE...
+                            </UploadLabel>
+                        </UploadButton>
                     </InputLabel>
                 </DetailWrapper>
             </InputWrapper>
             <ButtonWrapper>
-                <SearchButton >
-                    Search
-                </SearchButton>
+                <SubmitButton onclick={submitHandler}>
+                    Submit
+                </SubmitButton>
             </ButtonWrapper>
         </FormWrapper>
     )
