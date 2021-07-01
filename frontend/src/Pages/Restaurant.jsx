@@ -218,6 +218,8 @@ const Restaurant = () => {
                         <FilterButton>Filter</FilterButton>
                     </SearchHeader>
                     <ReviewComponent/>
+                    <ReviewComponent/>
+                    <ReviewComponent/>
                 </Leftcontainer>
                 <Rightcontainer>
                     <InfoWrapper>
