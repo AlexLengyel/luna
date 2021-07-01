@@ -1,12 +1,14 @@
 from django.db.models import Avg
 from rest_framework import serializers
 
+from category.serializers.mainserializer import MainCategorySerializer
 from restaurant.models import Restaurant
 
 
 class MainRestaurantSerializer(serializers.ModelSerializer):
     average = serializers.SerializerMethodField(read_only=True)
     review_count = serializers.SerializerMethodField(read_only=True)
+    categories = MainCategorySerializer(many=True)
 
     def get_average(self, obj):
         return Restaurant.objects.filter(id=obj.id).aggregate(rating=Avg('reviews__rating'))

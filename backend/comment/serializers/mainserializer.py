@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from comment.models import Comment
+from user.serializers.mainserializer import MainUserSerializer
 
 
 class MainCommentSerializer(serializers.ModelSerializer):
+    user = MainUserSerializer(read_only=True)
 
     class Meta:
         model = Comment
