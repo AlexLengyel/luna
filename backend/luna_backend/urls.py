@@ -42,6 +42,10 @@ urlpatterns = [
                       admin.site.urls
                   ),
                   path(
+                      'backend/api/',
+                      include('registration.urls')
+                  ),
+                  path(
                       'backend/api/auth/token/',
                       jwt_views.TokenObtainPairView.as_view(),
                       name='token_obtain_pair'
