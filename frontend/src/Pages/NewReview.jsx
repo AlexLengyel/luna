@@ -1,9 +1,11 @@
+import {useEffect, useState} from "react";
+
 import banner from "../Assets/images/banner.png";
 import styled from "styled-components";
 import StarSystem from "../Components/StarSystem";
 import {Button} from "../Style/GlobalButtons";
 import StarRating from "../Components/StarRating";
-import Rating from "../Components/StarRating";
+import Axios from "../helpers/axios";
 
 const Banner = styled.div`
   height: 25vh;
@@ -70,7 +72,42 @@ const SubmitButton = styled(Button)`
   width: 15%;
 `
 
+
 const NewReview = () => {
+    const [rating, setRating] = useState(0);
+    const [content, setContent] = useState();
+    const [restaurant, setRestaurant] = useState()
+
+    const fetchRestaurantData = async () => {
+        const config = {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        };
+        // fetch restaurant's data
+        const url = `restaurants/${1}`;
+        const response = await Axios.get(url, config);
+        setRestaurant(response.data);
+    };
+
+    useEffect(() => {
+        fetchRestaurantData()
+    }, [fetchRestaurantData])
+
+    const submitReview = async (restaurant_id) => {
+        const url = `reviews/new/${restaurant_id}/`;
+        const config = {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        };
+        const body = {
+            rating: rating,
+            content: content
+        }
+        try {
+            await Axios.post(url, body, config);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <>
             <Banner>
@@ -82,12 +119,16 @@ const NewReview = () => {
                 </div>
             </Banner>
             <ReviewWrapper>
-                <StarRating/>
-                <textarea  placeholder={"Your review helps others learn about great local businesses. \n" +
+                <StarRating passSetRating={setRating} passRating={rating}/>
+                <textarea onChange={(e) => setContent(e.target.value)}
+                          value={content}
+                          placeholder={"Your review helps others learn about great local businesses. \n" +
                 "\n" +
                 "Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."}/>
                 <ButtonWrapper>
-                    <SubmitButton type={"submit"}>SUBMIT</SubmitButton>
+                    <SubmitButton type={"submit"} onClick={() => submitReview(1)}>
+                        SUBMIT
+                    </SubmitButton>
                 </ButtonWrapper>
             </ReviewWrapper>
         </>
