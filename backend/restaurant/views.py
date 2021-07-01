@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthentic
 
 from luna_backend.permissions import IsOwnerOrReadOnly
 from restaurant.models import Restaurant
-from restaurant.serializers.mainserializer import MainRestaurantSerializer
+from restaurant.serializers.mainserializer import MainRestaurantSerializer, CreateRestaurantSerializer
 
 User = get_user_model()
 
@@ -21,7 +21,7 @@ class CreateRestaurantsView(CreateAPIView):
         - name, category, country, street, city, zip, email,
     """
     queryset = Restaurant.objects.all()
-    serializer_class = MainRestaurantSerializer
+    serializer_class = CreateRestaurantSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):

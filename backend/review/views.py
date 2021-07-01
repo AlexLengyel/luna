@@ -20,7 +20,7 @@ class CreateReviewView(CreateAPIView):
         Create a Review
 
         Body must contain:
-        - 'content' and 'rating' (1-5),
+        - 'content' and 'rating' (1-10),
     """
     queryset = Restaurant.objects.all()
     serializer_class = MainReviewSerializer
