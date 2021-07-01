@@ -25,9 +25,9 @@ ReactDOM.render(
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyle/>
             <>
+            <Router>
                 <Navigation/>
-                <Main>
-                    <Router>
+                     <Main>               
                         <Switch>
                             <Route path="/" component={ Home } exact/>
                             <Route path="/login" component={ Login } /> 
@@ -37,10 +37,10 @@ ReactDOM.render(
                             <Route path="/profile" component={ Profile } />
                             <Route path="/registration" component={ RegistrationPage} />
                             <Route path="/new_review" component={ NewReview } />
-                        </Switch>
-                    </Router>
-                </Main>
+                        </Switch>                 
+                     </Main>
                 <NavFooter/>
+            </Router>
             </>
         </ThemeProvider>
     </Provider>,
