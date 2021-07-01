@@ -11,6 +11,10 @@ import { Button } from "../Style/GlobalButtons"
 import { RestaurantsWrapper } from "../Style/container"
 import { useHistory } from "react-router-dom"
 import ReviewComponent from "../Components/Review"
+import { useEffect } from "react";
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import Axios from "../helpers/axios";
 
 
 const Uppercontainer = styled.div`
@@ -174,22 +178,50 @@ const SearchHeader = styled.div`
 
 const Restaurant = () => {
     const history = useHistory();
+    const token = useSelector((state) => state.token);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        async function fetchRestaurant() {
+          const url = "restaurants/1/";
+          const config = {
+            headers: { Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1MzIzMjkxLCJqdGkiOiJkMTQyZWZhOWZlMzg0OGU4OTk4Y2EwZmQzOTIwNWQ3YSIsInVzZXJfaWQiOjF9.o6NV3sK9iyEaBOihbI_c7gbUD5gWh2F4zrsjqKgMlTE"}` },
+          };
+          try {
+            const resp = await Axios.get(url, config);
+            if (resp.status === 200) {
+                dispatch({
+                    type: "setRestaurant",
+                    payload: resp.data,
+                  });
+            }
+          } catch (err) {
+            if (err.response.status === 400) {
+                console.log(err.response);
+              }      
+          }
+        }
+        fetchRestaurant();
+      }, [dispatch, token]);
 
+
+    const restaurant = useSelector((state) => state.restaurant);
+    console.log(restaurant)
     const reviewHandler = () =>{
-        history.push("/newreview");
+        history.push("/");
     }
 
     const editHandler = () =>{
         history.push("/createrestaurant");
     }
+
     return(
-        // <h1>Restaurant Page</h1>
         <>
             <Uppercontainer>
                 <BannerWrapper>
                     <InfoTab>
-                        <h1>Läderach Chocolatier Suisse</h1>
-                        <h2>Chocolatiers & Shops</h2>
+                        <h1>{restaurant.name}</h1>
+                        <h2>{restaurant.category}</h2>
                         <div className={"stars"}>
                             <StarSystem rating={"7"}/>
                             <p>68 reviews</p>
@@ -198,13 +230,13 @@ const Restaurant = () => {
                     <LocationTab>
                         <Map/>
                         <DetailInfoWrapper>
-                            <img src={pin} alt="pin"/><p>Bahnhofstrasse 106</p>
+                            <img src={pin} alt="pin"/><p>{restaurant.street}</p>
                         </DetailInfoWrapper>
                         <DetailInfoWrapper>
-                            <img src={phone} alt="phone"/><p>+41 44 211 53 72</p> 
+                            <img src={phone} alt="phone"/><p>{restaurant.phone_number}</p> 
                         </DetailInfoWrapper>
                         <DetailInfoWrapper>
-                            <img src={laptop} alt="laptop"/>  <p>laederach.com</p>  
+                            <img src={laptop} alt="laptop"/>  <p>{restaurant.website}</p>  
                         </DetailInfoWrapper>
                     </LocationTab>
                 </BannerWrapper>
@@ -224,19 +256,18 @@ const Restaurant = () => {
                 <Rightcontainer>
                     <InfoWrapper>
                         <DetailInfoWrapper>
-                             <img src={clock} alt="clock"/> <p>Monday</p>
+                             <img src={clock} alt="clock"/> <p>{restaurant.opening_hours}</p>
                         </DetailInfoWrapper>
                         <DetailWrapperBorder>
-                            <img src={money} alt="money"/> <p>Price Level</p>
+                            <img src={money} alt="money"/> <p>{restaurant.price_level === 1? "$": restaurant.price_level === 2? "$$": "$$$" }</p>
                         </DetailWrapperBorder>
                         <ButtonWrapper>
-                            <WriteReviewBtn onclick={reviewHandler}>WRITE A REVIEW</WriteReviewBtn>
-                            <EditDataBtn onclick={editHandler}>EDIT DATA</EditDataBtn>
+                            <WriteReviewBtn onClick={reviewHandler} >WRITE A REVIEW</WriteReviewBtn>
+                            <EditDataBtn onClick={editHandler}>EDIT DATA</EditDataBtn>
                         </ButtonWrapper>
                     </InfoWrapper>
                 </Rightcontainer>
             </RestaurantsWrapper>
-       
         </>
     )
 }

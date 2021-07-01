@@ -13,6 +13,11 @@ const authReducer = (state=initialState, action) => {
         newState.userToken = action.payload;
         return newState;
     }
+    if (action.type === "setRestaurant") {
+        const newState = {...state};
+        newState.restaurant = action.payload;
+        return newState;
+    }
     return state
 }
 
