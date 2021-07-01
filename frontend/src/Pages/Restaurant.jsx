@@ -186,7 +186,7 @@ const Restaurant = () => {
         async function fetchRestaurant() {
           const url = "restaurants/";
           const config = {
-            headers: { Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1MzI4OTA0LCJqdGkiOiI4Zjk4MTZkNDNiNzM0OWE3YjBlMTU0NmJlZDE5OWY3NCIsInVzZXJfaWQiOjF9.U2O0p0EFaA6ludolRdoAQztd7hgE5l_iJWBeDEeCwCk"}` },
+            headers: { Authorization: `Bearer ${token}` },
           };
           try {
             const resp = await Axios.get(url, config);
