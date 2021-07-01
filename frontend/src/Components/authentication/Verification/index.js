@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { BaseInput } from "../../../Style/GlobalInput";
 import { Button } from "../../../Style/GlobalButtons";
 import Title from "../../BaseTitle";
-import { useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 import { useState } from "react";
+import Axios from "../../../helpers/axios";
+import { useSelector } from "react-redux";
 
 const FormGrid =styled.div`
   display: grid;
@@ -51,9 +53,7 @@ const FinishRegButton = styled(Button)`
 `
 
 const Verification = () =>{
-
-
-    const [email, setEmail] = useState("");
+    const registrationEmail = useSelector(state => state.confirmationEmail)
     const [username, setUsername] = useState("");
     const [code, setCode] = useState("");
     const [password, setPassword] = useState("");
@@ -61,9 +61,6 @@ const Verification = () =>{
     const [location, setLocation] = useState("");
     const history = useHistory();
     
-    const onEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
 
     const onUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -87,34 +84,34 @@ const Verification = () =>{
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
-        const url = "auth/registration/validation/";
+        const url = "/registration/validate/";
         const body = {
-          email: email,
+          email: registrationEmail,
           username: username,
           code: code,
           password: password,
           password_repeat: password_repeat,
           location: location,
         }
-        history.push("/login");
 
-        
-    /* 
+
+
         try {
-          const resp = await Axios.patch(url, body);
-          if (resp.status === 200) {
+          const response = await Axios.patch(url, body);
+          if (response.status === 200) {
             history.push("/login");
           }
-        } catch (err) {
+        } 
+        catch (err) {
           console.log(err.response);
-        } */
+        }
     };
 
     return (
         <VerifyWrapper onSubmit={onSubmitHandler}>
                <Title titlename= 'Verification' linelength='100px' height= '10vh'/>
                 <FormGrid>
-                    <RegistrationInput placeholder='Email address' type='email' onChange={onEmailChange}/>
+                    <RegistrationInput name={registrationEmail} type='email' readonly value={registrationEmail}/>
                     <RegistrationInput placeholder='Verification Code' type='text' onChange={onVCodeChange} />
                     <RegistrationInput placeholder='Username' type='text' onChange={onUsernameChange}/>
                     <RegistrationInput placeholder='Location' type='text' onChange={onLocationChange}/>

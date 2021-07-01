@@ -5,6 +5,8 @@ import { BaseInput } from "../../BaseInput";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import Title from "../../BaseTitle";
+import Axios from '../../../helpers/axios';
+import { useDispatch } from "react-redux"
 
 const FormWrapper =styled(MidWrapper)`
     `
@@ -23,44 +25,46 @@ const RegisterButton = styled(Button)`
     border: none;
 `
 
-const RegistrationStart = () =>{
+const RegistrationStart = () => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [email, setEmail] = useState("");
+  
+    const onEmailChange = (event) => {
+      setEmail(event.target.value);
+    };
+  
+  
+    const onSubmitHandler = async (event) => {
+      event.preventDefault();
+      const url = "/registration/";
+      const body = {
+        email: email,
+      };
 
-        const history = useHistory();
-        const [email, setEmail] = useState("");
-    
-        const OnEmailChange = (event) => {
-            setEmail(event.target.value);
+      try {
+        const response = await Axios.post(url, body);
+        if (response.status === 201) {
+            const action = {
+                type: "registration_email",
+                payload: email
+              }
+              dispatch(action);
+      
+          history.push("/registration/verified");
         }
-    
-        const onSubmitHandler = async (event) => {
-            event.preventDefault();
-            const url = "auth/registration/";
-            const body = {
-                email
-            };
-            history.push('/registration/verified')
+      } catch (err) {
+        if (err.response.status === 400) {
+          console.log("This email is taken");
         }
-
-        /* try {
-            const response = await Axios.post(url, body);
-
-            if (response.status === 200) {
-                history.push("/signup/success");
-            }
-        }
-        catch(err) {
-            if (err.response.status === 400) {
-                console.log("This email is taken");
-            }
-        } 
-    }*/
-
-
+      }
+    };
+  
     return (
         <FormWrapper onSubmit={onSubmitHandler} >
                 <Title titlename= 'REGISTRATION' linelength='100px' height= '10vh' />
-                <RegInput type= 'email' placeholder='Email address' onChange={OnEmailChange}>
+                <RegInput type= 'email' placeholder='Email address' onChange={onEmailChange}>
                 </RegInput>
                 <RegisterButton>
                     Register

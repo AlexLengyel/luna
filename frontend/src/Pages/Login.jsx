@@ -5,6 +5,7 @@ import { BaseInput } from "../Components/BaseInput";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import Axios from "../helpers/axios";
 
 const FormWrapper =styled.div`
     display: flex;
@@ -35,7 +36,7 @@ const ButtonWrapper =styled.div`
 
 const LogingButton = styled(Button)`
     width: 14vw;
-    min-width: 100px
+    min-width: 100px;
     `
 
 
@@ -44,6 +45,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const onUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -59,33 +61,34 @@ const Login = () => {
           username: username,
           password: password,
         };
-    };
-    //     try {
-    //         const resp = await Axios.post(url, body);
-    //         if (resp.status === 200) {
-    //           setUsername("");
-    //           setPassword("");
-      
-    //           dispatch({
-    //             type: 'auth/login',
-    //             payload: resp.data,
-    //           });
+    
 
-    //           localStorage.setItem("token", resp.data.access);
-    //           history.push("/");
-    //         }
-    //       } catch (err) {
-    //         if (err.response.status === 400) {
-    //           console.log(err.response);
-    //         }
-    //     }
-    // };
+    try {
+        const resp = await Axios.post(url, body);
+        if (resp.status === 200) {
+        setUsername("");
+        setPassword("");
+            
+        dispatch({
+        type: 'auth/login',
+        payload: resp.data,
+        });
+    
+        localStorage.setItem("token", resp.data.access);
+        history.push("/");
+        }
+        } catch (err) {
+        if (err.response.status === 400) {
+        console.log(err.response);
+        }
+        }
+        };
     
     
      
     
     return(
-        <FormWrapper>
+        <FormWrapper onSubmit={onHandleSubmit}>
             <Title titlename="LOGIN" linelength="100px"/>
             <InputWrapper>
                 <BaseInput placeholder='Username' type='username' required= 'This field is required' onChange={onUsernameChange}/>
