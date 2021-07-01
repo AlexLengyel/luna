@@ -53,7 +53,7 @@ class ListReviewsByRestaurantView(ListAPIView):
 
     def get_queryset(self):
         restaurant_id = self.kwargs["pk"]
-        return Review.objects.filter(restaurant=restaurant_id)
+        return Review.objects.filter(restaurant=restaurant_id).order_by("-created")
 
 
 class ListReviewsByUserView(ListAPIView):
@@ -66,7 +66,7 @@ class ListReviewsByUserView(ListAPIView):
 
     def get_queryset(self):
         user_id = self.kwargs["pk"]
-        return Review.objects.filter(user=user_id)
+        return Review.objects.filter(user=user_id).order_by("-created")
 
 
 class RetrieveUpdateDestroyReviewView(RetrieveUpdateDestroyAPIView):

@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 def user_directory_path(instance, filename):
-    return f'{instance.username}/{filename}'
+    return f'{instance.name}/{filename}'
 
 PRICE_LEVEL = [
   (1, "$"),
