@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 def user_directory_path(instance, filename):
-    return f'{instance.username}/{filename}'
+    return f'{instance.name}/{filename}'
 
 PRICE_LEVEL = [
   (1, "$"),
@@ -31,7 +31,7 @@ class Restaurant(models.Model):
                                          "From 9 up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     email = models.EmailField(unique=True)
-    price_level = models.IntegerField(choices=PRICE_LEVEL, max_length=3)
+    price_level = models.IntegerField(choices=PRICE_LEVEL)
     image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
