@@ -7,15 +7,14 @@ import phone from "../Assets/svgs/phone.svg"
 import laptop from "../Assets/svgs/laptop.svg"
 import screenshot from "../Assets/svgs/screenshot.svg"
 import StarSystem from "../Components/StarSystem"
-import ReviewsSearchComponent from "../Components/Search/ReviewsSearch"
 import { Button } from "../Style/GlobalButtons"
 import { RestaurantsWrapper } from "../Style/container"
 import { useHistory } from "react-router-dom"
+import ReviewComponent from "../Components/Review"
 
 
 const Uppercontainer = styled.div`
     height: 40vh;
-    border: green solid;
     background-image: url(${laederach});
     background-repeat: no-repeat;
     background-size: cover;
@@ -25,11 +24,6 @@ const Uppercontainer = styled.div`
     justify-content: center;
 `
 
-const Lowercontainer = styled.div`
-    border: blue solid;
-    width: 80vw;
-
-`
 const BannerWrapper = styled.div`
     height: 20vh;
     width: 100%;
@@ -37,7 +31,6 @@ const BannerWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: blue solid 2px;
 `
 const InfoTab = styled.div`
     width: 100%;
@@ -47,23 +40,33 @@ const InfoTab = styled.div`
     flex-direction: column; 
     margin: 5vw;
     
-    div {
+    .stars {
         display: flex;
         justify-content: space-between;
-        
+        align-items: center;
+     
         p{
-            color: white;
+            color: ${(props)=> props.theme.backgroundWhite};
+            font-weight: ${(props)=> props.theme.textWeightThin};
         }
         
     }
 
     h1 {
-        color: white;
+        color: ${(props)=> props.theme.backgroundWhite};
+        font-size: ${(props)=> props.theme.textSizeXXL};
+        font-weight: ${(props)=> props.theme.textWeightBold};
+    
     }
 
     h2 {
-        color: white;
+        color: ${(props)=> props.theme.backgroundWhite};
+        font-size: ${(props)=> props.theme.textSizeXL};
+        font-weight: ${(props)=> props.theme.textWeightThin};
+        padding-top: 1%;
     }
+
+    
 `
 
 const LocationTab = styled.div`
@@ -94,7 +97,6 @@ const Map = styled.div`
 `
 const Leftcontainer = styled.div`
     width: 50%;
-    border: red solid;
 `
 
 const Rightcontainer = styled.div`
@@ -124,7 +126,8 @@ const FilterButton = styled(Button)`
   border-radius: 28px;
 `
 const InfoWrapper = styled.div`
-  width: 90%;
+  width: 80%;
+  margin-left: 10%;
   height: 40vh; 
   background-color: ${(props) => props.theme.whitesmoke}
   display: flex;
@@ -160,6 +163,15 @@ const DetailWrapperBorder = styled(DetailInfoWrapper)`
     border-top: ${(props)=> props.theme.lightSilver} 1px solid;
 
 `
+
+const SearchHeader = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 1%;
+`
+
+
 const Restaurant = () => {
     const history = useHistory();
 
@@ -199,16 +211,13 @@ const Restaurant = () => {
            </Uppercontainer>
            <RestaurantsWrapper>
                 <Leftcontainer>
-                    {/* <SearchBar>
-                        <input type={"text"} placeholder={"Filter list..."}/>
-                    </SearchBar>
-                    <FilterButton>Filter</FilterButton>
-                    <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/> */}
+                    <SearchHeader>
+                        <SearchBar>
+                            <input type={"text"} placeholder={"Filter list..."}/>
+                        </SearchBar>
+                        <FilterButton>Filter</FilterButton>
+                    </SearchHeader>
+                    <ReviewComponent/>
                 </Leftcontainer>
                 <Rightcontainer>
                     <InfoWrapper>
