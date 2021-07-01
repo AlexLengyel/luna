@@ -67,6 +67,8 @@ height: 70px;
 width: 100%;
 border-bottom: 1px solid ${props => props.theme.whisper};
 display: flex;
+justify-content: space-between;
+flex-direction: row;
 
 img {
   width: 66px;
@@ -74,21 +76,23 @@ img {
 .stars {
     padding: 20px 10px;
     width: 30%;
-    height: 10%;
+    height: 100%;
+    padding-right: 40%;
 }
 
 .created {
+    padding-top: 1%;
+    padding-right: 1%;
     font-size: ${props => props.theme.textSizeM};
 }
 
 .user {
   height: 100%;
-  width: 205px;
+  width: 145px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0 10px;
-
   h1 {
     color: ${props => props.theme.orange};
     font-weight: ${props => props.theme.textWeightBold};
