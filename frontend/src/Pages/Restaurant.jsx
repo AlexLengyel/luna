@@ -1,15 +1,17 @@
 import styled from "styled-components"
 import laederach from "../Assets/images/DSC_0213.png"
+import pin from "../Assets/svgs/pin.svg"
+import money from "../Assets/svgs/money.svg"
+import clock from "../Assets/svgs/clock.svg"
+import phone from "../Assets/svgs/phone.svg"
+import laptop from "../Assets/svgs/laptop.svg"
+import screenshot from "../Assets/svgs/screenshot.svg"
 import StarSystem from "../Components/StarSystem"
 import ReviewsSearchComponent from "../Components/Search/ReviewsSearch"
 import { Button } from "../Style/GlobalButtons"
+import { RestaurantsWrapper } from "../Style/container"
+import { useHistory } from "react-router-dom"
 
-const RestaurantWrapper = styled.div`
-    width: 100%;
-    display: flex; 
-    justify-content: space-around;
-    flex-direction: column;
-`
 
 const Uppercontainer = styled.div`
     height: 40vh;
@@ -34,6 +36,8 @@ const BannerWrapper = styled.div`
     background-color: rgb(0,0,0,0.5);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border: blue solid 2px;
 `
 const InfoTab = styled.div`
     width: 100%;
@@ -46,6 +50,11 @@ const InfoTab = styled.div`
     div {
         display: flex;
         justify-content: space-between;
+        
+        p{
+            color: white;
+        }
+        
     }
 
     h1 {
@@ -58,31 +67,42 @@ const InfoTab = styled.div`
 `
 
 const LocationTab = styled.div`
-    width: 80%;
-    height: 30vh;
+    width: 40%;
+    min-width: 200px;
+    height: 170%;
+    max-height: 140%
+    min-height: 200px;
     background-color: white;
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    justify-content: center;
     flex-direction: column; 
-    margin: 5vw;
-    
-    div {
-        display: flex;
-        justify-content: space-between;
+    margin-top: 10%;
+    margin-right: 5vw;  
+
+    p {
+        font-size: 16px
+    }
+    img {
+        height: 80%;
+        width: auto;
     }
 
 `
 const Map = styled.div`
     height: 50%;
-    background-image: url(${laederach});
+    background-image: url(${screenshot});
 `
 const Leftcontainer = styled.div`
     width: 50%;
+    border: red solid;
 `
 
 const Rightcontainer = styled.div`
     width: 50%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction column;
 `
 
 const SearchBar = styled.form`
@@ -103,11 +123,56 @@ const SearchBar = styled.form`
 const FilterButton = styled(Button)`
   border-radius: 28px;
 `
- 
+const InfoWrapper = styled.div`
+  width: 90%;
+  height: 40vh; 
+  background-color: ${(props) => props.theme.whitesmoke}
+  display: flex;
+  justify-content: center;
+  `
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5% 5%;
+`
+const WriteReviewBtn = styled(Button)`
+  border-radius: 28px;
+  width: 40%;
+`
+
+const EditDataBtn = styled(Button)`
+  border-radius: 28px;
+  width: 40%;
+
+` 
+
+const DetailInfoWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 0.15fr 1fr;
+  padding: 2% 5%;
+
+  p {
+      font-weight: ${(props)=> props.theme.textWeightThin}
+  }
+`
+const DetailWrapperBorder = styled(DetailInfoWrapper)`
+    border-top: ${(props)=> props.theme.lightSilver} 1px solid;
+
+`
 const Restaurant = () => {
+    const history = useHistory();
+
+    const reviewHandler = () =>{
+        history.push("/newreview");
+    }
+
+    const editHandler = () =>{
+        history.push("/createrestaurant");
+    }
     return(
         // <h1>Restaurant Page</h1>
-        <RestaurantWrapper>
+        <>
             <Uppercontainer>
                 <BannerWrapper>
                     <InfoTab>
@@ -120,15 +185,21 @@ const Restaurant = () => {
                     </InfoTab>
                     <LocationTab>
                         <Map/>
-                        <p>Bahnhofstrasse 106</p>
-                        <p>+41 44 211 53 72</p>  
-                        <p>laederach.com</p>  
+                        <DetailInfoWrapper>
+                            <img src={pin} alt="pin"/><p>Bahnhofstrasse 106</p>
+                        </DetailInfoWrapper>
+                        <DetailInfoWrapper>
+                            <img src={phone} alt="phone"/><p>+41 44 211 53 72</p> 
+                        </DetailInfoWrapper>
+                        <DetailInfoWrapper>
+                            <img src={laptop} alt="laptop"/>  <p>laederach.com</p>  
+                        </DetailInfoWrapper>
                     </LocationTab>
                 </BannerWrapper>
            </Uppercontainer>
-            <Lowercontainer>
+           <RestaurantsWrapper>
                 <Leftcontainer>
-                    <SearchBar>
+                    {/* <SearchBar>
                         <input type={"text"} placeholder={"Filter list..."}/>
                     </SearchBar>
                     <FilterButton>Filter</FilterButton>
@@ -137,14 +208,25 @@ const Restaurant = () => {
                                    <ReviewsSearchComponent/>
                                    <ReviewsSearchComponent/>
                                    <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
+                                   <ReviewsSearchComponent/> */}
                 </Leftcontainer>
                 <Rightcontainer>
-
+                    <InfoWrapper>
+                        <DetailInfoWrapper>
+                             <img src={clock} alt="clock"/> <p>Monday</p>
+                        </DetailInfoWrapper>
+                        <DetailWrapperBorder>
+                            <img src={money} alt="money"/> <p>Price Level</p>
+                        </DetailWrapperBorder>
+                        <ButtonWrapper>
+                            <WriteReviewBtn onclick={reviewHandler}>WRITE A REVIEW</WriteReviewBtn>
+                            <EditDataBtn onclick={editHandler}>EDIT DATA</EditDataBtn>
+                        </ButtonWrapper>
+                    </InfoWrapper>
                 </Rightcontainer>
-            </Lowercontainer>
-            
-        </RestaurantWrapper>
+            </RestaurantsWrapper>
+       
+        </>
     )
 }
 
