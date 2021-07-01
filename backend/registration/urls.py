@@ -8,15 +8,15 @@ urlpatterns = [
         RegistrationView.as_view()
     ),
     path(
-        'registration/validation/',
+        'registration/validate/',
         ValidationView.as_view()
     ),
     path(
-        'password-reset/',
+        'auth/password-reset/',
         PasswordResetView.as_view()
     ),
     path(
-        'password-reset/validation/',
+        'auth/password-reset/validate/',
         PasswordResetValidationView.as_view()
     ),
 ]

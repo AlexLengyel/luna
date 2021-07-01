@@ -42,7 +42,7 @@ urlpatterns = [
                       admin.site.urls
                   ),
                   path(
-                      'backend/api/auth/',
+                      'backend/api/',
                       include('registration.urls')
                   ),
                   path(
