@@ -92,7 +92,7 @@ const Navigation = () => {
                 <NavButton onClick={homeBtnHandler} borderBottom={location.pathname === "/" ? "3px solid #E47D31" : "3px solid transparent"}>Home</NavButton>
                 <NavButton onClick={searchBtnHandler} borderBottom={location.pathname === "/search/restaurants" ? "3px solid #E47D31" : "3px solid transparent"}>Search</NavButton>
                 <NavButton onClick={profileBtnHandler} borderBottom={location.pathname === "/profile" ? "3px solid #E47D31" : "3px solid transparent"} >Profile</NavButton>
-                <SignUpButton onClick={signupBtnHandler}>SIGN UP</SignUpButton>
+                <SignUpButton onClick={signupBtnHandler}>{localStorage.token ? "" : "SIGN UP"}</SignUpButton>
                 <LoginButton onClick={LogHandler}>{localStorage.token ? "LOG OUT" : "LOG IN"}</LoginButton>
             </NavBarRight>
         </NavBarMain>
