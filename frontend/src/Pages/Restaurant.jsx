@@ -180,11 +180,13 @@ const Restaurant = () => {
     const history = useHistory();
     const token = useSelector((state) => state.token);
     const dispatch = useDispatch();
+    const restaurant = useSelector((state) => state.restaurant);
     
-   
+
     useEffect(() => {
+
         async function fetchRestaurant() {
-          const url = "restaurants/";
+          const url = "restaurants/1/";
           const config = {
             headers: { Authorization: `Bearer ${token}` },
           };
@@ -193,7 +195,7 @@ const Restaurant = () => {
             if (resp.status === 200) {
                 dispatch({
                     type: "setRestaurant",
-                    payload: resp.data[1],
+                    payload: resp.data,
                   });
             }
           } catch (err) {
@@ -215,7 +217,7 @@ const Restaurant = () => {
         history.push("/createrestaurant");
     }
     
-    const restaurant = useSelector((state) => state.restaurant);
+    console.log(restaurant);
 
     return(
         <>
@@ -225,8 +227,8 @@ const Restaurant = () => {
                         <h1>{restaurant.name}</h1>
                         <h2>{restaurant.category}</h2>
                         <div className={"stars"}>
-                            <StarSystem rating={"7"}/>
-                            <p>68 reviews</p>
+                            <StarSystem rating={restaurant.average.rating}/>
+                            <p>{restaurant.review_count} reviews</p>
                         </div>
                     </InfoTab>
                     <LocationTab>
@@ -251,7 +253,7 @@ const Restaurant = () => {
                         </SearchBar>
                         <FilterButton>Filter</FilterButton>
                     </SearchHeader>
-                    { restaurant.reviews.length > 0 ? restaurant.review.map((id) => {
+                    { restaurant.reviews.length > 0 ? restaurant.reviews.map((id) => {
                         return (
                             <ReviewComponent data={id}/>
                         );

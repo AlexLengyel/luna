@@ -24,6 +24,11 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 restaurant: action.payload 
             };
+        case "setReview":
+            return {
+                ...state, 
+                review: action.payload 
+            };
 
         case "registration_email":
                 return { 

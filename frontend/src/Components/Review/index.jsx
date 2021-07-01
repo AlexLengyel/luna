@@ -1,9 +1,12 @@
 import mock_image from "../../Assets/images/mock_image.png";
-import {ListContent, ListLine, ListUser} from "../../Style/container";
 import styled from "styled-components";
 import {Button} from "../../Style/GlobalButtons";
 import like_icon from "../../Assets/svgs/like.svg"
 import StarSystem from "../StarSystem"
+import { useEffect } from "react";
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import Axios from "../../helpers/axios";
 
 
 const ReviewWrapper =  styled.div`
@@ -105,33 +108,63 @@ img {
 }
 `
 
-const ReviewComponent = () => {
+const ReviewComponent = (id) => {
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  const review = useSelector((state) => state.review);
+  
+
+  useEffect( (id) => {
+      
+      async function fetchReview() {
+        const url = `reviews/${id}/`;
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        try {
+          const resp = await Axios.get(url, config);
+          if (resp.status === 200) {
+              dispatch({
+                  type: "setReview",
+                  payload: resp.data,
+                });
+          }
+        } catch (err) {
+          if (err.response.status === 400) {
+              console.log(err.response);
+            }      
+        }
+      }
+      fetchReview();
+    }, [dispatch, token]);
+
+
     return (
         <ReviewWrapper>
             <Header>
                 <img src={mock_image} alt={"restaurant"}/>
                 <div className={"user"}>
-                    <h1>Laurent H.</h1>
-                    <h2>6 Reviews in total</h2>
+                    <h1>{review.user.first_name}{review.user.last_name}</h1>
+                    <h2>{review.user.user_reviews} Reviews in total</h2>
                 </div>
                 <div className={"stars"}>
-                    <StarSystem rating={"7"}/>
+                    <StarSystem rating={review.rating}/>
                 </div>
-                <p className={"created"}>01.01.2018 15:22 </p>
+                <p className={"created"}>{review.created}</p>
             </Header>
             <ReviewContent>
-                <p>This location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.</p>
+                <p>{review.content}</p>
             </ReviewContent>     
             <ReviewFooter>
                 <ButtonWrapper>
                     <LikeButton>
                         <img src={like_icon} alt={"like icon"}/>
                         <p>Like</p>
-                        <p>23</p>
+                        <p>{review.liked_by.length}</p>
                     </LikeButton>
                     <CommentButton>
                         <p>Comment</p>
-                        <p>23</p>
+                        <p>{review.comments.length}</p>
                     </CommentButton>
                 </ButtonWrapper>
                 <div className={"comment_all"}>View all comments</div>
