@@ -12,6 +12,7 @@ import Restaurant from "./Pages/Restaurant";
 import Profile from "./Pages/Profile";
 import NavFooter from './Components/footer/index';
 import Navigation from './Components/navigation';
+import RegistrationPage from './Pages/Registration';
 import Login from './Pages/Login';
 import NewReview from "./Pages/NewReview";
 import CreateRestaurant from './Pages/CreateRestaurant';
@@ -34,6 +35,7 @@ ReactDOM.render(
                             <Route path="/createRestaurant" component={ CreateRestaurant } exact/>
                             <Route path="/restaurant" component={ Restaurant } />
                             <Route path="/profile" component={ Profile } />
+                            <Route path="/registration" component={ RegistrationPage} />
                             <Route path="/new_review" component={ NewReview } />
                         </Switch>
                     </Router>
