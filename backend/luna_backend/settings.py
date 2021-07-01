@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'comment',
     'category',
     'openinghours',
+    'registration',
     'user',
     # Apps
     'rest_framework',
