@@ -6,7 +6,7 @@ import Verified from "../Components/authentication/Verified/index";
 const RegistrationPage = () => {
     return(
         <Switch>
-                <Route path="/registration/start" component={ RegistrationStart } exact/>
+                <Route path="/registration" component={ RegistrationStart } exact/>
                 <Route path="/registration/verification" component={ Verification } exact/>
                 <Route path="/registration/verified" component={ Verified } exact/>
         </Switch>
