@@ -181,18 +181,19 @@ const Restaurant = () => {
     const token = useSelector((state) => state.token);
     const dispatch = useDispatch();
     
+   
     useEffect(() => {
         async function fetchRestaurant() {
-          const url = "restaurants/1/";
+          const url = "restaurants/";
           const config = {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1MzI4OTA0LCJqdGkiOiI4Zjk4MTZkNDNiNzM0OWE3YjBlMTU0NmJlZDE5OWY3NCIsInVzZXJfaWQiOjF9.U2O0p0EFaA6ludolRdoAQztd7hgE5l_iJWBeDEeCwCk"}` },
           };
           try {
             const resp = await Axios.get(url, config);
             if (resp.status === 200) {
                 dispatch({
                     type: "setRestaurant",
-                    payload: resp.data,
+                    payload: resp.data[1],
                   });
             }
           } catch (err) {
@@ -205,8 +206,7 @@ const Restaurant = () => {
       }, [dispatch, token]);
 
 
-    const restaurant = useSelector((state) => state.restaurant);
-    console.log(restaurant)
+
     const reviewHandler = () =>{
         history.push("/");
     }
@@ -214,6 +214,8 @@ const Restaurant = () => {
     const editHandler = () =>{
         history.push("/createrestaurant");
     }
+    
+    const restaurant = useSelector((state) => state.restaurant);
 
     return(
         <>
@@ -249,9 +251,11 @@ const Restaurant = () => {
                         </SearchBar>
                         <FilterButton>Filter</FilterButton>
                     </SearchHeader>
-                    <ReviewComponent/>
-                    <ReviewComponent/>
-                    <ReviewComponent/>
+                    { restaurant.reviews.length > 0 ? restaurant.review.map((id) => {
+                        return (
+                            <ReviewComponent data={id}/>
+                        );
+                    }) : null}
                 </Leftcontainer>
                 <Rightcontainer>
                     <InfoWrapper>

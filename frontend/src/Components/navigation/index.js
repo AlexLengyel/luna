@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Logo from '../../Assets/images/LUNA.png';
 import {Button} from '../../Style/GlobalButtons';
-
+import { useHistory, useLocation } from "react-router-dom";
 
 const NavBarMain = styled.div`
   width: 100%;
@@ -54,18 +54,46 @@ const NavButton = styled.button`
     border-bottom: 3px solid ${(props) => props.theme.orange};
     cursor: pointer;
   }
+  border-bottom: ${props => props.borderBottom || "none"};
 `
 
 const Navigation = () => {
-    return (
+  
+  const history = useHistory();
+  const location = useLocation();
+
+  const homeBtnHandler = () => {
+    history.push("/");
+  }
+  const searchBtnHandler = () => {
+    history.push("/search/restaurants");
+  }
+  const profileBtnHandler = () => {
+    history.push("/profile");
+  }
+  const signupBtnHandler = () => {
+    history.push("/registration");
+  }
+
+  const LogHandler = () => {
+    if (localStorage.token) {
+        localStorage.clear();
+        history.push('/Login');
+    }
+    else {
+        history.push('/Login');
+    }
+}
+
+  return (
         <NavBarMain>
             <LogoWrapper src={Logo}/>
             <NavBarRight>
-                <NavButton>Home</NavButton>
-                <NavButton>Search</NavButton>
-                <NavButton>Profile</NavButton>
-                <SignUpButton>SIGN UP</SignUpButton>
-                <LoginButton>LOGIN</LoginButton>
+                <NavButton onClick={homeBtnHandler} borderBottom={location.pathname === "/" ? "3px solid #E47D31" : "3px solid transparent"}>Home</NavButton>
+                <NavButton onClick={searchBtnHandler} borderBottom={location.pathname === "/search/restaurants" ? "3px solid #E47D31" : "3px solid transparent"}>Search</NavButton>
+                <NavButton onClick={profileBtnHandler} borderBottom={location.pathname === "/profile" ? "3px solid #E47D31" : "3px solid transparent"} >Profile</NavButton>
+                <SignUpButton onClick={signupBtnHandler}>SIGN UP</SignUpButton>
+                <LoginButton onClick={LogHandler}>{localStorage.token ? "LOG OUT" : "LOG IN"}</LoginButton>
             </NavBarRight>
         </NavBarMain>
     )

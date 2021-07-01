@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BaseInput = styled.input`
-    color: ${props => props.theme.whisper};
+    color: ${props => props.theme.nobel};
     outline: none;
     height: 52px;
     margin-bottom: 15px;
