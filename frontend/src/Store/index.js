@@ -4,6 +4,7 @@ const initialState = {
     userToken: ''
 }
 
+
 const authReducer = (state=initialState, action) => {
     if (action.type === 'auth/login'){
         return { ...state, userToken: action.payload.access}
