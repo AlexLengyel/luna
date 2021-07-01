@@ -49,8 +49,7 @@ const labels = {
   10: 'Excellent+',
 };
 
-const StarRating = () => {
-    const [rating, setRating] = useState(0);
+const StarRating = (props) => {
     const [hover, setHover] = useState(0);
     return (
         <StarRatingWrapper>
@@ -67,10 +66,10 @@ const StarRating = () => {
                             direction: (index % 2 !== 0) ? "ltr" : "rtl",
                             marginBottom: "10px"
                         }}
-                        className={index <= (hover || rating) ? "on" : "off"}
-                        onClick={() => setRating(index)}
+                        className={index <= (hover || props.passRating) ? "on" : "off"}
+                        onClick={() => props.passSetRating(index)}
                         onMouseEnter={() => setHover(index)}
-                        onMouseLeave={() => setHover(rating)}
+                        onMouseLeave={() => setHover(props.passRating)}
                     >
                         <span className="star">&#9733;</span>
                     </StarButton>

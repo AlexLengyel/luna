@@ -14,7 +14,7 @@ WEEKDAYS = [
 
 class OpeningHour(models.Model):
 
-    restaurant = models.ForeignKey(to=Restaurant, related_name='opening_hours', on_delete=models.CASCADE)
+    # restaurant = models.ForeignKey(to=Restaurant, related_name='opening_hours', on_delete=models.CASCADE)
     weekday = models.IntegerField(choices=WEEKDAYS)
     from_hour = models.TimeField()
     to_hour = models.TimeField()
