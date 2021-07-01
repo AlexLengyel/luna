@@ -42,14 +42,12 @@ class ValidationView(UpdateAPIView):
             if User.objects.get(email=request.data['email']).registration.code == request.data['code']:
                 user = self.get_object()
                 user.username = request.data['username']
-                if request.data['password'] == request.data['password_confirmation']:
+                if request.data['password'] == request.data['password_repeat']:
                     user.set_password(request.data['password'])
                 else:
                     return Response({'detail': 'password did not match'}, status=404)
-                if request.data['first_name']:
-                    user.first_name = request.data['first_name']
-                if request.data['last_name']:
-                    user.last_name = request.data['last_name']
+                if request.data['location']:
+                    user.location = request.data['location']
                 user.is_active = True
                 user.save()
                 registration = user.registration
@@ -105,7 +103,7 @@ class PasswordResetValidationView(UpdateAPIView):
         user = self.get_object()
         if request.data['email'] == user.email:
             if user.registration.code == request.data['code'] and user.registration.is_used is False:
-                if request.data['password'] == request.data['password_confirmation']:
+                if request.data['password'] == request.data['password_repeat']:
                     user.set_password(request.data['password'])
                 else:
                     return Response({'detail': 'password did not match'}, status=404)
