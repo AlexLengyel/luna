@@ -34,7 +34,6 @@ const SignUpButton = styled(Button)`
   margin-right: 1px;
 `
 const LoginButton = styled(Button)`
-  border-radius: 0px 28px 28px 0px;
   margin-right: 5%;
 `
 
@@ -99,15 +98,17 @@ const Navigation = () => {
                   Search
                 </NavButton>
 
-                <NavButton onClick={profileBtnHandler} borderBottom={location.pathname === "/profile" ? "3px solid #E47D31" : "3px solid transparent"}>
-                  {localStorage.token ? "Profile" : ""}
+                <NavButton onClick={profileBtnHandler}
+                           borderBottom={location.pathname.includes("/profile") ? "3px solid #E47D31" : "3px solid transparent"}
+                           style = {{"display" : localStorage.token ? "block" : "none"}}
+                >
+                  Profile
                 </NavButton>
                 {localStorage.token ? "":
                 <SignUpButton onClick={signupBtnHandler}>
                    SIGN UP
                 </SignUpButton>}
-
-                <LoginButton onClick={LogHandler}>
+                <LoginButton onClick={LogHandler} style = {{"borderRadius" : localStorage.token ? "28px" : "0px 28px 28px 0px"}}>
                   {localStorage.token ? "LOG OUT" : "LOG IN"}
                 </LoginButton>
             </NavBarRight>

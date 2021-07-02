@@ -19,12 +19,11 @@ import Axios from "../helpers/axios";
 
 const Uppercontainer = styled.div`
     height: 40vh;
-    background-image: url(${laederach});
+    background-image: url(${props => props.banner});
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     display: flex;
-    align-items: top;
     justify-content: center;
 `
 
@@ -77,7 +76,7 @@ const LocationTab = styled.div`
     width: 40%;
     min-width: 200px;
     height: 170%;
-    max-height: 140%
+    max-height: 140%;
     min-height: 200px;
     background-color: white;
     display: flex;
@@ -214,12 +213,12 @@ const Restaurant = () => {
           }
         }
         fetchRestaurant();
-      }, [dispatch, token]);
+      }, [dispatch, token, id]);
 
 
 
     const reviewHandler = () =>{
-        history.push("/");
+        history.push("/new_review");
     }
 
     const editHandler = () =>{
@@ -230,7 +229,7 @@ const Restaurant = () => {
         <>
         {restaurant &&
             <div>
-                <Uppercontainer>
+                <Uppercontainer banner={restaurant.image ? restaurant.image : laederach}>
                     <BannerWrapper>
                         <InfoTab>
                             <h1>{restaurant.name}</h1>

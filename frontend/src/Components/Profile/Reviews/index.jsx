@@ -17,10 +17,17 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    
+    p {
+      font-size: 12px;
+      font-weight: 300;
+    }
   }
   
   span {
     margin-top: 20px;
+    font-size: 16px;
+    font-weight: 300;
   }
 `
 
@@ -28,22 +35,21 @@ const ReviewProfile = (props) => {
     return (
         <Wrapper>
             <div className={"title"}>
-                <h1>Läderach Chocolatier Suisse</h1>
-                <p>01.01.2018 15:22</p>
+                <h1>{props.review.restaurant.name}</h1>
+                <p>{(new Date(Date.parse(props.review.restaurant.created))).toUTCString()}</p>
             </div>
-            <StarSystem rating={4}/>
-            <span>This location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station.
-                The people there seem to be quite good and helpful in their service. </span>
+            <StarSystem rating={props.review.restaurant.average.rating}/>
+            <span>{props.review.content} </span>
         </Wrapper>
     )
 }
 
 const ReviewsProfile = (props) => {
 
-    const [review, setReview] = useState(null);
+    const [reviews, setReviews] = useState(null);
 
     useEffect(() => {
-        async function fetchUser() {
+        async function fetchReview() {
             const url = `reviews/user/${props.user_id}/`;
             const config = {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
@@ -51,7 +57,7 @@ const ReviewsProfile = (props) => {
             try {
                 const resp = await Axios.get(url, config);
                 if (resp.status === 200) {
-                    setReview(resp.data);
+                    setReviews(resp.data);
                 }
             } catch (err) {
                 if (err.response.status === 400) {
@@ -60,15 +66,13 @@ const ReviewsProfile = (props) => {
             }
         }
 
-        fetchUser()
+        fetchReview()
     }, [props.user_id]);
-
-    console.log(review)
 
     return (
         <>
             <h1>REVIEWS</h1>
-            { review ? review.map((item, index) => <ReviewProfile key={`${index}-${item.id}`} review={item}/>): <h1>No reviews</h1>}
+            { reviews ? reviews.map((item, index) => <ReviewProfile key={`${index}-${item.id}`} review={item}/>): <h1>No reviews</h1>}
         </>
     )
 }
