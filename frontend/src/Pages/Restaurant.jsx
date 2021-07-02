@@ -241,7 +241,7 @@ const Restaurant = () => {
     }, [token]);
 
     const reviewHandler = () => {
-        history.push("/new_review");
+        history.push(`/new_review/${id}/`);
     }
 
     const editHandler = () => {

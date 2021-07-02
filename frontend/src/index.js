@@ -36,7 +36,7 @@ ReactDOM.render(
                             <Route path="/restaurant/:id" component={ Restaurant } />
                             <Route path="/profile" component={ Profile } />
                             <Route path="/registration" component={ RegistrationPage} />
-                            <Route path="/new_review" component={ NewReview } />
+                            <Route path="/new_review/:id" component={ NewReview } />
                         </Switch>                 
                      </Main>
                 <NavFooter/>

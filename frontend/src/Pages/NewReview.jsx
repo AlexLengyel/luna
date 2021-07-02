@@ -84,16 +84,16 @@ const NewReview = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         // fetch restaurant's data
-        // const url = `restaurants/${restaurant_id}/`;
-        const url = `restaurants/1/`;
+        const url = `restaurants/${restaurant_id}/`;
+        // const url = `restaurants/1/`;
         const response = await Axios.get(url);
         setRestaurant(response.data);
     }, [])
 
     const submitReview = async (e) => {
-        // const url = `reviews/new/${restaurant_id}/`;
+        const url = `reviews/new/${restaurant_id}/`;
         e.preventDefault()
-        const url = `reviews/new/1/`;
+        // const url = `reviews/new/1/`;
         const config = {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         };
