@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 
-from comment.models import Comment
 from luna_backend.permissions import IsOwnerOrReadOnly
 from restaurant.models import Restaurant
 from review.models import Review
@@ -22,7 +21,6 @@ class CreateReviewView(CreateAPIView):
         Body must contain:
         - 'content' and 'rating' (1-10),
     """
-    queryset = Restaurant.objects.all()
     serializer_class = MainReviewSerializer
     permission_classes = [IsAuthenticated]
 

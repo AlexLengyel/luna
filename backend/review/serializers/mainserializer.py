@@ -9,8 +9,8 @@ from user.serializers.mainserializer import MainUserSerializer
 class MainReviewSerializer(serializers.ModelSerializer):
     liked_by = MainUserSerializer(many=True, required=False)
     comments = MainCommentSerializer(many=True, required=False)
-    user = MainUserSerializer()
-    restaurant = MainRestaurantSerializer()
+    user = MainUserSerializer(read_only=True)
+    restaurant = MainRestaurantSerializer(read_only=True)
 
     class Meta:
         model = Review

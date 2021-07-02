@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 import { applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const initialState = {
     userToken: ''
@@ -41,6 +42,10 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
+const enhancer = composeWithDevTools(
+    applyMiddleware(thunk)
+);
+
+const store = createStore(reducer, enhancer);
 
 export default store;

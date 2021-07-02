@@ -74,25 +74,26 @@ const SubmitButton = styled(Button)`
 
 const NewReview = () => {
     const [rating, setRating] = useState(0);
-    const [content, setContent] = useState();
-    const [restaurant, setRestaurant] = useState()
+    const [content, setContent] = useState("");
+    const [restaurant, setRestaurant] = useState({})
 
-    const fetchRestaurantData = async () => {
-        const config = {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        };
+    const url = window.location.pathname;
+    const url_array = url.split("/");
+    const restaurant_id = url_array[url_array.length - 2];
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
         // fetch restaurant's data
-        const url = `restaurants/${1}`;
-        const response = await Axios.get(url, config);
+        // const url = `restaurants/${restaurant_id}/`;
+        const url = `restaurants/1/`;
+        const response = await Axios.get(url);
         setRestaurant(response.data);
-    };
-
-    useEffect(() => {
-        fetchRestaurantData()
     }, [])
 
-    const submitReview = async (restaurant_id) => {
-        const url = `reviews/new/${restaurant_id}/`;
+    const submitReview = async (e) => {
+        // const url = `reviews/new/${restaurant_id}/`;
+        e.preventDefault()
+        const url = `reviews/new/1/`;
         const config = {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         };
@@ -102,20 +103,27 @@ const NewReview = () => {
         }
         try {
             await Axios.post(url, body, config);
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
+            setContent("Owner can not create a review of his/her restaurant");
         }
     }
 
     return (
         <>
             <Banner>
-                <h1>{restaurant.name}</h1>
-                <h2>Chocolatiers & Shops</h2>
-                <div className={"stars"}>
-                    <StarSystem rating={"7"}/>
-                    <p>68 reviews</p>
-                </div>
+                {
+                    restaurant.id ?
+                        <>
+                            <h1>{restaurant.name}</h1>
+                            <h2>{restaurant.categories[0].name}</h2>
+                            <div className={"stars"}>
+                                <StarSystem rating={`${parseInt(restaurant.average.rating)}`}/>
+                                <p>{restaurant.review_count} reviews</p>
+                            </div>
+                        </> : null
+                }
+
             </Banner>
             <ReviewWrapper>
                 <StarRating passSetRating={setRating} passRating={rating}/>
@@ -125,7 +133,7 @@ const NewReview = () => {
                 "\n" +
                 "Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."}/>
                 <ButtonWrapper>
-                    <SubmitButton type={"submit"} onClick={() => submitReview(1)}>
+                    <SubmitButton type={"submit"} onClick={(e) => submitReview(e)}>
                         SUBMIT
                     </SubmitButton>
                 </ButtonWrapper>
