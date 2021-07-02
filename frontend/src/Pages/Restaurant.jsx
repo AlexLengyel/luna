@@ -9,7 +9,7 @@ import screenshot from "../Assets/svgs/screenshot.svg"
 import StarSystem from "../Components/StarSystem"
 import { Button } from "../Style/GlobalButtons"
 import { RestaurantsWrapper } from "../Style/container"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams} from "react-router-dom"
 import ReviewComponent from "../Components/Review"
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
@@ -181,23 +181,33 @@ const Restaurant = () => {
     const token = useSelector((state) => state.token);
     const dispatch = useDispatch();
     const restaurant = useSelector((state) => state.restaurant);
-    
+    const reviews = useSelector((state) => state.review);
 
+    let { id } = useParams();
     useEffect(() => {
 
         async function fetchRestaurant() {
-          const url = "restaurants/1/";
+          const url_restaurant = `/restaurants/${id}/`;
+          const url_reviews = `/reviews/restaurant/${id}/`;
           const config = {
             headers: { Authorization: `Bearer ${token}`},
           };
           try {
-            const resp = await Axios.get(url, config);
+            const resp = await Axios.get(url_restaurant, config);
             if (resp.status === 200) {
                 dispatch({
                     type: "setRestaurant",
                     payload: resp.data,
                   });
             }
+            const reviewresp = await Axios.get(url_reviews, config);
+            if (reviewresp.status === 200) {
+                dispatch({
+                    type: "setReview",
+                    payload: reviewresp.data,
+                  });
+            }
+
           } catch (err) {
             if (err.response.status === 400) {
                 console.log(err.response);
@@ -217,8 +227,6 @@ const Restaurant = () => {
         history.push("/createrestaurant");
     }
     
-    console.log(restaurant);
-
     return(
         <>
         {restaurant &&
@@ -255,9 +263,9 @@ const Restaurant = () => {
                             </SearchBar>
                             <FilterButton>Filter</FilterButton>
                         </SearchHeader>
-                        { restaurant.reviews.length > 0 ? restaurant.reviews.map((id) => {
+                        { reviews && reviews.length > 0 ? reviews.map((review) => {
                             return (
-                                <ReviewComponent data={id}/>
+                                <ReviewComponent review={review}/>
                             );
                         }) : null}
                     </Leftcontainer>

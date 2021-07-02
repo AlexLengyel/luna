@@ -63,6 +63,7 @@ const ReviewFooter = styled.div`
   }
 `
 const ReviewContent = styled.div`
+  padding: 2% 2%;
 
 `
 const Header = styled.div`
@@ -108,37 +109,9 @@ img {
 }
 `
 
-const ReviewComponent = (id) => {
-  const token = useSelector((state) => state.token);
-  const dispatch = useDispatch();
-  const review = useSelector((state) => state.review);
-  
+const ReviewComponent = ({review}) => {
 
-  useEffect( (id) => {
-      
-      async function fetchReview() {
-        const url = `reviews/${id}/`;
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        try {
-          const resp = await Axios.get(url, config);
-          if (resp.status === 200) {
-              dispatch({
-                  type: "setReview",
-                  payload: resp.data,
-                });
-          }
-        } catch (err) {
-          if (err.response.status === 400) {
-              console.log(err.response);
-            }      
-        }
-      }
-      fetchReview();
-    }, [dispatch, token]);
-
-
+    console.log(review)
     return (
       <> {review &&
         <ReviewWrapper>
