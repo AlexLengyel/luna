@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import banner from "../Assets/images/banner.png";
+import banner_icon from "../Assets/images/banner.png";
 import styled from "styled-components";
 import StarSystem from "../Components/StarSystem";
 import {Button} from "../Style/GlobalButtons";
@@ -9,7 +9,7 @@ import Axios from "../helpers/axios";
 const Banner = styled.div`
   height: 25vh;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(${banner});
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(${props => props.banner});
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -88,7 +88,7 @@ const NewReview = () => {
         // const url = `restaurants/1/`;
         const response = await Axios.get(url);
         setRestaurant(response.data);
-    }, [])
+    }, [restaurant_id])
 
     const submitReview = async (e) => {
         const url = `reviews/new/${restaurant_id}/`;
@@ -112,7 +112,7 @@ const NewReview = () => {
 
     return (
         <>
-            <Banner>
+            <Banner banner={restaurant.image ? restaurant.image : banner_icon}>
                 {
                     restaurant.id ?
                         <>
