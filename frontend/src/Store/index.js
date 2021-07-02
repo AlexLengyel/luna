@@ -18,6 +18,17 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 token: action.payload 
             };
+        
+        case "setRestaurant":
+            return {
+                ...state, 
+                restaurant: action.payload 
+            };
+        case "setReview":
+            return {
+                ...state, 
+                review: action.payload 
+            };
 
         case "registration_email":
                 return { 
@@ -29,28 +40,6 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 }
-             
-    
-  
-/* const authReducer = (state=initialState, action) => {
-    if (action.type === 'auth/login'){
-        return { ...state, userToken: action.payload.access}
-    }
-    if (action.type === "setToken") {
-        const newState = {...state};
-        newState.userToken = action.payload;
-        return newState;
-    }
-    return state
-}
-
-
-const rootReducer = (state, action) => {
-    if (action.type === "USER_LOGOUT") {
-        return authReducer(undefined, action)
-    }
-    return authReducer(state, action)
-} */
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 

@@ -33,7 +33,7 @@ ReactDOM.render(
                             <Route path="/login" component={ Login } /> 
                             <Route path="/search" component={ Search } />
                             <Route path="/createRestaurant" component={ CreateRestaurant } exact/>
-                            <Route path="/restaurant" component={ Restaurant } />
+                            <Route path="/restaurant/:id" component={ Restaurant } />
                             <Route path="/profile" component={ Profile } />
                             <Route path="/registration" component={ RegistrationPage} />
                             <Route path="/new_review" component={ NewReview } />
