@@ -299,7 +299,7 @@ const Restaurant = () => {
                                 <img src={money} alt="money"/> <p>{restaurant.price_level === 1 ? "$" : restaurant.price_level === 2 ? "$$" : "$$$"}</p>
                             </DetailWrapperBorder>
                             <ButtonWrapper style={{"display": localStorage.token ? "flex" : "none"}}>
-                                <WriteReviewBtn onClick={reviewHandler}>WRITE A REVIEW</WriteReviewBtn>
+                                <WriteReviewBtn onClick={reviewHandler} style={{"display": user.id === restaurant.owner ? "none" : "block"}}>WRITE A REVIEW</WriteReviewBtn>
                                 <EditDataBtn onClick={editHandler} style={{"display": user.id === restaurant.owner ? "block" : "none"}}>EDIT DATA</EditDataBtn>
                             </ButtonWrapper>
                         </InfoWrapper>
