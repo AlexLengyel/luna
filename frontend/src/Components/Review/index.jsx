@@ -3,10 +3,6 @@ import styled from "styled-components";
 import {Button} from "../../Style/GlobalButtons";
 import like_icon from "../../Assets/svgs/like.svg"
 import StarSystem from "../StarSystem"
-import { useEffect } from "react";
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import Axios from "../../helpers/axios";
 
 
 const ReviewWrapper =  styled.div`
@@ -111,7 +107,7 @@ img {
 
 const ReviewComponent = ({review}) => {
 
-    console.log(review)
+    console.log(review.rating)
     return (
       <> {review &&
         <ReviewWrapper>
@@ -122,7 +118,7 @@ const ReviewComponent = ({review}) => {
                       <h2>{review.user.user_reviews} Reviews in total</h2>
                   </div>
                   <div className={"stars"}>
-                      <StarSystem rating={review.rating}/>
+                      <StarSystem rating={`${review.rating}`}/>
                   </div>
                   <p className={"created"}>{review.created}</p>
               </Header>

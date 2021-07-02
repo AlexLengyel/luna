@@ -237,7 +237,7 @@ const Restaurant = () => {
                             <h1>{restaurant ? restaurant.name : 'loading'}</h1>
                             <h2>{restaurant.category}</h2>
                             <div className={"stars"}>
-                                <StarSystem rating={restaurant.average.rating}/>
+                                <StarSystem rating={`${restaurant.average.rating}`}/>
                                 <p>{restaurant.review_count} reviews</p>
                             </div>
                         </InfoTab>
