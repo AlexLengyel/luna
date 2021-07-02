@@ -86,11 +86,19 @@ export const ListContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  .top {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
   h1 {
     color: ${props => props.theme.orange};
     font-size: ${props => props.theme.textSizeL};
     font-weight: ${props => props.theme.textWeightBold};
+    margin-bottom: 10px;
   }
 
   h2 {

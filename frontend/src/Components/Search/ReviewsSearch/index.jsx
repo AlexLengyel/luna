@@ -1,4 +1,4 @@
-import mock_image from "../../../Assets/images/mock_image.png";
+import avatar from "../../../Assets/svgs/avatar.svg";
 import {ListContent, ListLine, ListUser, ListWrapper} from "../../../Style/container";
 import styled from "styled-components";
 import {Button} from "../../../Style/GlobalButtons";
@@ -35,41 +35,72 @@ const ButtonWrapper = styled.div`
   }
 `
 
-const ReviewsSearchComponent = () => {
+const ReviewsSearchComponent = (props) => {
     return (
         <ListWrapper>
             <ListLine/>
             <ListUser>
-                <img src={mock_image} alt={"restaurant"}/>
+                <img src={props.review.user.profile_picture ? props.review.user.profile_picture : avatar} alt={"user"}/>
                 <div className={"user"}>
-                    <h1>Laurent H.</h1>
-                    <h2>6 Reviews in total</h2>
+                    <h1>{props.review.user.first_name} {props.review.user.last_name[0]}.</h1>
+                    <h2>{props.review.user.review_count} Reviews in total</h2>
                 </div>
             </ListUser>
             <ListContent>
-                <h1>Colinz Bar</h1>
-                <h2>Ugh. Don't waste your time. Pizza dough good, thin crust but ingredients so so. Side of mixed vegetables very oily and mainly bell... read
-                    more</h2>
+                <div className={"top"}>
+                    <h1>{props.review.restaurant.name}</h1>
+                    <h2>{props.review.content}</h2>
+                </div>
                 <ButtonWrapper>
                     <LikeButton>
                         <img src={like_icon} alt={"like icon"}/>
                         <p>Like</p>
-                        <p>23</p>
+                        <p>{props.review.liked_by.length}</p>
                     </LikeButton>
                     <CommentButton>
                         <p>Comment</p>
-                        <p>23</p>
+                        <p>{props.review.comments.length}</p>
                     </CommentButton>
                 </ButtonWrapper>
                 <p className={"latest_comments"}>Latest comments</p>
-                <div className={"comment"}>
-                    <p className={"comment_user"}>Colin Wirz</p>
-                    <p className={"comment_text"}>Actually you have no taste!</p>
-                </div>
-                <div className={"comment"}>
-                    <p className={"comment_user"}>Laurent Meyer</p>
-                    <p className={"comment_text"}>Sorry bro!</p>
-                </div>
+                {
+                    props.review.comments.length === 0
+                    ?
+                    <>
+                        <div className={"comment"}>No comments!</div>
+                        <div className={"comment"}/>
+                    </>
+                    :
+                    props.review.comments.length === 1
+                    ?
+                    <>
+                        <div className={"comment"}>
+                            <p className={"comment_user"}>
+                                {props.review.comments[props.review.comments.length - 1].user.first_name}
+                                {props.review.comments[props.review.comments.length - 1].user.last_name}
+                            </p>
+                            <p className={"comment_text"}>{props.review.comments[props.review.comments.length - 1].content}</p>
+                        </div>
+                        <div className={"comment"}/>
+                    </>
+                    :
+                    <>
+                        <div className={"comment"}>
+                            <p className={"comment_user"}>
+                                {props.review.comments[props.review.comments.length - 1].user.first_name}
+                                {props.review.comments[props.review.comments.length - 1].user.last_name}
+                            </p>
+                            <p className={"comment_text"}>{props.review.comments[props.review.comments.length - 1].content}</p>
+                        </div>
+                        <div className={"comment"}>
+                            <p className={"comment_user"}>
+                                {props.review.comments[props.review.comments.length - 2].user.first_name}
+                                {props.review.comments[props.review.comments.length - 2].user.last_name}
+                            </p>
+                            <p className={"comment_text"}>{props.review.comments[props.review.comments.length - 2].content}</p>
+                        </div>
+                    </>
+                }
             </ListContent>
         </ListWrapper>
     )

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import mock_image from "../../Assets/images/mock_image.png"
 import {ListLine, ListWrapper} from "../../Style/container";
 import StarSystem from "../StarSystem";
+import {Link} from "react-router-dom";
 
 const ListWrapperRestaurant = styled(ListWrapper)`
   h1 {
@@ -15,8 +15,10 @@ const ListWrapperRestaurant = styled(ListWrapper)`
   }
 
   .restaurant_img {
+    height: 288px;
     width: 100%;
     margin-top: 2%;
+    object-fit: cover;
   }
 `
 
@@ -28,18 +30,26 @@ const StarsWrapper = styled.div`
   align-items: center;
 `
 
-const RestaurantComponent = () => {
+const RestaurantComponent = (props) => {
     return (
-        <ListWrapperRestaurant>
-            <ListLine/>
-            <h1>Restaurant Name</h1>
-            <h2>Address</h2>
-            <StarsWrapper>
-                <StarSystem rating={"7"}/>
-                <p>72</p>
-            </StarsWrapper>
-            <img className={"restaurant_img"} src={mock_image} alt={"restaurant"}/>
-        </ListWrapperRestaurant>
+        <Link to={"/restaurant"} style={{"textDecoration": "none"}}>
+            <ListWrapperRestaurant>
+                <ListLine/>
+                <h1>{props.restaurant.name}</h1>
+                <h2>{props.restaurant.city}</h2>
+                <StarsWrapper>
+                    <StarSystem rating={props.restaurant.average.rating}/>
+                    <p>{props.restaurant.review_count}</p>
+                </StarsWrapper>
+                {
+                    props.restaurant.image
+                    ?
+                    <img className={"restaurant_img"} src={props.restaurant.image} alt={"restaurant"}/>
+                    :
+                    <div className={"restaurant_img"}>No image</div>
+                }
+            </ListWrapperRestaurant>
+        </Link>
     )
 }
 

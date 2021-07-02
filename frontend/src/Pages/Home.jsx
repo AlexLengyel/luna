@@ -4,6 +4,8 @@ import RestaurantComponent from "../Components/RestaurantComponent";
 import {Button} from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
 import {RestaurantsWrapper} from "../Style/container";
+import React, {useEffect, useState} from "react";
+import Axios from "../helpers/axios.js";
 
 const Search = styled.form`
   height: 20vh;
@@ -14,7 +16,7 @@ const Search = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   input {
     height: 20%;
     width: 25%;
@@ -24,7 +26,7 @@ const Search = styled.form`
     font-size: 16px;
     padding: 0 10px;
   }
-  
+
   button {
     height: 20%;
     width: 7%;
@@ -33,6 +35,27 @@ const Search = styled.form`
 `
 
 const Home = () => {
+
+    const [restaurants, setRestaurants] = useState(null);
+
+    useEffect(() => {
+        async function fetchRestaurants() {
+            const url = "home/";
+            try {
+                const resp = await Axios.get(url);
+                if (resp.status === 200) {
+                    setRestaurants(resp.data);
+                }
+            } catch (err) {
+                if (err.response.status === 400) {
+                    console.log(err.response);
+                }
+            }
+        }
+
+        fetchRestaurants();
+    }, []);
+
     return (
         <>
             <Search>
@@ -41,10 +64,13 @@ const Home = () => {
             </Search>
             <Title titlename="BEST RATED RESTAURANTS" linelength="270px" height="10vh"/>
             <RestaurantsWrapper>
-                <RestaurantComponent/>
-                <RestaurantComponent/>
-                <RestaurantComponent/>
-                <RestaurantComponent/>
+                {
+                    restaurants
+                    ?
+                    restaurants.map((item, index) => <RestaurantComponent key={`${index}-${item.name}`} restaurant={item}/>)
+                    :
+                    <h1>No entries found!</h1>
+                }
             </RestaurantsWrapper>
         </>
     )

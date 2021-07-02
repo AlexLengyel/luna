@@ -1,29 +1,29 @@
 import {ListContent, ListLine, ListUser, ListWrapper} from "../../../Style/container";
-import mock_image from "../../../Assets/images/mock_image.png";
+import avatar from "../../../Assets/svgs/avatar.svg";
 import styled from "styled-components";
 
 const ListWrapperUser = styled(ListWrapper)`
   height: 192px;
+  overflow: hidden;
 `
 
 const ListContentUser = styled(ListContent)`
   height: 118px;
 `
 
-const UserSearchComponent = () => {
+const UserSearchComponent = (props) => {
     return (
         <ListWrapperUser>
             <ListLine/>
             <ListUser>
-                <img src={mock_image} alt={"restaurant"}/>
+                <img src={props.user.profile_picture ? props.user.profile_picture : avatar} alt={"user"}/>
                 <div className={"user"}>
-                    <h1>Laurent H.</h1>
-                    <h2>6 Reviews in total</h2>
+                    <h1>{props.user.first_name} {props.user.last_name[0]}.</h1>
+                    <h2>{props.user.review_count} Reviews in total</h2>
                 </div>
             </ListUser>
             <ListContentUser>
-                <h2>Im professional photographer with an eye for details in every thing I do in my live. Every time a pass by a nice restaurant i have to stop
-                    and take notes... read more</h2>
+                <h2>{props.user.description}</h2>
             </ListContentUser>
         </ListWrapperUser>
     )

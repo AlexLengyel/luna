@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-
 import banner from "../Assets/images/banner.png";
 import styled from "styled-components";
 import StarSystem from "../Components/StarSystem";
@@ -90,7 +89,7 @@ const NewReview = () => {
 
     useEffect(() => {
         fetchRestaurantData()
-    }, [fetchRestaurantData])
+    }, [])
 
     const submitReview = async (restaurant_id) => {
         const url = `reviews/new/${restaurant_id}/`;
@@ -111,7 +110,7 @@ const NewReview = () => {
     return (
         <>
             <Banner>
-                <h1>Läderach Chocolatier Suisse</h1>
+                <h1>{restaurant.name}</h1>
                 <h2>Chocolatiers & Shops</h2>
                 <div className={"stars"}>
                     <StarSystem rating={"7"}/>

@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const StarSystem = (props) => {
     switch (props.rating) {
-        case "10":{
+        case 10:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -27,7 +27,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "9":{
+        case 9:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -38,7 +38,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "8":{
+        case 8:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -49,7 +49,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "7":{
+        case 7:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -60,7 +60,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "6":{
+        case 6:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -71,7 +71,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "5":{
+        case 5:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -82,7 +82,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "4":{
+        case 4:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -93,7 +93,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "3":{
+        case 3:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -104,7 +104,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "2":{
+        case 2:{
             return (
                 <Wrapper>
                     <img src={full_star} alt={"full_star"} />
@@ -115,7 +115,7 @@ const StarSystem = (props) => {
                 </Wrapper>
             )
         }
-        case "1":{
+        case 1:{
             return (
                 <Wrapper>
                     <img src={half_star} alt={"half_star"} />
