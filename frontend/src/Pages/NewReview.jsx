@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-
 import banner from "../Assets/images/banner.png";
 import styled from "styled-components";
 import StarSystem from "../Components/StarSystem";
@@ -110,7 +109,6 @@ const NewReview = () => {
         }
     }
 
-    console.log(restaurant)
     return (
         <>
             <Banner>
