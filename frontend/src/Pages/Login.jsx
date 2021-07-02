@@ -100,9 +100,9 @@ const Login = () => {
                 <BaseInput placeholder='Password' type='password' required='This field is required' onChange={onPasswordChange}/>
             </InputWrapper>
             <ButtonWrapper>
-                <LogingButton type={"submit"}>
+                <LoginButton type={"submit"}>
                     Login
-                </LogingButton>
+                </LoginButton>
             </ButtonWrapper>
         </FormWrapper>
     )
