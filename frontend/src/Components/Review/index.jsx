@@ -140,36 +140,39 @@ const ReviewComponent = (id) => {
 
 
     return (
+      <> {review &&
         <ReviewWrapper>
-            <Header>
-                <img src={mock_image} alt={"restaurant"}/>
-                <div className={"user"}>
-                    <h1>{review.user.first_name}{review.user.last_name}</h1>
-                    <h2>{review.user.user_reviews} Reviews in total</h2>
-                </div>
-                <div className={"stars"}>
-                    <StarSystem rating={review.rating}/>
-                </div>
-                <p className={"created"}>{review.created}</p>
-            </Header>
-            <ReviewContent>
-                <p>{review.content}</p>
-            </ReviewContent>     
-            <ReviewFooter>
-                <ButtonWrapper>
-                    <LikeButton>
-                        <img src={like_icon} alt={"like icon"}/>
-                        <p>Like</p>
-                        <p>{review.liked_by.length}</p>
-                    </LikeButton>
-                    <CommentButton>
-                        <p>Comment</p>
-                        <p>{review.comments.length}</p>
-                    </CommentButton>
-                </ButtonWrapper>
-                <div className={"comment_all"}>View all comments</div>
-            </ReviewFooter>
-        </ReviewWrapper>
+              <Header>
+                  <img src={mock_image} alt={"restaurant"}/>
+                  <div className={"user"}>
+                      <h1>{review.user.first_name}{review.user.last_name}</h1>
+                      <h2>{review.user.user_reviews} Reviews in total</h2>
+                  </div>
+                  <div className={"stars"}>
+                      <StarSystem rating={review.rating}/>
+                  </div>
+                  <p className={"created"}>{review.created}</p>
+              </Header>
+              <ReviewContent>
+                  <p>{review.content}</p>
+              </ReviewContent>     
+              <ReviewFooter>
+                  <ButtonWrapper>
+                      <LikeButton>
+                          <img src={like_icon} alt={"like icon"}/>
+                          <p>Like</p>
+                          <p>{review.liked_by.length}</p>
+                      </LikeButton>
+                      <CommentButton>
+                          <p>Comment</p>
+                          <p>{review.comments.length}</p>
+                      </CommentButton>
+                  </ButtonWrapper>
+                  <div className={"comment_all"}>View all comments</div>
+              </ReviewFooter>
+          </ReviewWrapper>
+        }
+      </> 
     )
 }
 

@@ -188,7 +188,7 @@ const Restaurant = () => {
         async function fetchRestaurant() {
           const url = "restaurants/1/";
           const config = {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}`},
           };
           try {
             const resp = await Axios.get(url, config);
@@ -221,59 +221,62 @@ const Restaurant = () => {
 
     return(
         <>
-            <Uppercontainer>
-                <BannerWrapper>
-                    <InfoTab>
-                        <h1>{restaurant.name}</h1>
-                        <h2>{restaurant.category}</h2>
-                        <div className={"stars"}>
-                            <StarSystem rating={restaurant.average.rating}/>
-                            <p>{restaurant.review_count} reviews</p>
-                        </div>
-                    </InfoTab>
-                    <LocationTab>
-                        <Map/>
-                        <DetailInfoWrapper>
-                            <img src={pin} alt="pin"/><p>{restaurant.street}</p>
-                        </DetailInfoWrapper>
-                        <DetailInfoWrapper>
-                            <img src={phone} alt="phone"/><p>{restaurant.phone_number}</p> 
-                        </DetailInfoWrapper>
-                        <DetailInfoWrapper>
-                            <img src={laptop} alt="laptop"/>  <p>{restaurant.website}</p>  
-                        </DetailInfoWrapper>
-                    </LocationTab>
-                </BannerWrapper>
-           </Uppercontainer>
-           <RestaurantsWrapper>
-                <Leftcontainer>
-                    <SearchHeader>
-                        <SearchBar>
-                            <input type={"text"} placeholder={"Filter list..."}/>
-                        </SearchBar>
-                        <FilterButton>Filter</FilterButton>
-                    </SearchHeader>
-                    { restaurant.reviews.length > 0 ? restaurant.reviews.map((id) => {
-                        return (
-                            <ReviewComponent data={id}/>
-                        );
-                    }) : null}
-                </Leftcontainer>
-                <Rightcontainer>
-                    <InfoWrapper>
-                        <DetailInfoWrapper>
-                             <img src={clock} alt="clock"/> <p>{restaurant.opening_hours}</p>
-                        </DetailInfoWrapper>
-                        <DetailWrapperBorder>
-                            <img src={money} alt="money"/> <p>{restaurant.price_level === 1? "$": restaurant.price_level === 2? "$$": "$$$" }</p>
-                        </DetailWrapperBorder>
-                        <ButtonWrapper>
-                            <WriteReviewBtn onClick={reviewHandler} >WRITE A REVIEW</WriteReviewBtn>
-                            <EditDataBtn onClick={editHandler}>EDIT DATA</EditDataBtn>
-                        </ButtonWrapper>
-                    </InfoWrapper>
-                </Rightcontainer>
-            </RestaurantsWrapper>
+        {restaurant &&
+            <div>
+                <Uppercontainer>
+                    <BannerWrapper>
+                        <InfoTab>
+                            <h1>{restaurant ? restaurant.name : 'loading'}</h1>
+                            <h2>{restaurant.category}</h2>
+                            <div className={"stars"}>
+                                <StarSystem rating={restaurant.average.rating}/>
+                                <p>{restaurant.review_count} reviews</p>
+                            </div>
+                        </InfoTab>
+                        <LocationTab>
+                            <Map/>
+                            <DetailInfoWrapper>
+                                <img src={pin} alt="pin"/><p>{restaurant.street}</p>
+                            </DetailInfoWrapper>
+                            <DetailInfoWrapper>
+                                <img src={phone} alt="phone"/><p>{restaurant.phone_number}</p> 
+                            </DetailInfoWrapper>
+                            <DetailInfoWrapper>
+                                <img src={laptop} alt="laptop"/>  <p>{restaurant.website}</p>  
+                            </DetailInfoWrapper>
+                        </LocationTab>
+                    </BannerWrapper>
+                </Uppercontainer>
+                <RestaurantsWrapper>
+                    <Leftcontainer>
+                        <SearchHeader>
+                            <SearchBar>
+                                <input type={"text"} placeholder={"Filter list..."}/>
+                            </SearchBar>
+                            <FilterButton>Filter</FilterButton>
+                        </SearchHeader>
+                        { restaurant.reviews.length > 0 ? restaurant.reviews.map((id) => {
+                            return (
+                                <ReviewComponent data={id}/>
+                            );
+                        }) : null}
+                    </Leftcontainer>
+                    <Rightcontainer>
+                        <InfoWrapper>
+                            <DetailInfoWrapper>
+                                <img src={clock} alt="clock"/> <p>{restaurant.opening_hours}</p>
+                            </DetailInfoWrapper>
+                            <DetailWrapperBorder>
+                                <img src={money} alt="money"/> <p>{restaurant.price_level === 1? "$": restaurant.price_level === 2? "$$": "$$$" }</p>
+                            </DetailWrapperBorder>
+                            <ButtonWrapper>
+                                <WriteReviewBtn onClick={reviewHandler} >WRITE A REVIEW</WriteReviewBtn>
+                                <EditDataBtn onClick={editHandler}>EDIT DATA</EditDataBtn>
+                            </ButtonWrapper>
+                        </InfoWrapper>
+                    </Rightcontainer>
+                </RestaurantsWrapper>  
+            </div>}
         </>
     )
 }
