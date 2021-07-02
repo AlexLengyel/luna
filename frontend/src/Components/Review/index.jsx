@@ -1,4 +1,3 @@
-import mock_image from "../../Assets/images/mock_image.png";
 import styled from "styled-components";
 import {Button} from "../../Style/GlobalButtons";
 import like_icon from "../../Assets/svgs/like.svg"

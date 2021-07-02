@@ -1,5 +1,4 @@
 import {Link, Route, Switch, useLocation} from "react-router-dom";
-import Home from "./Home";
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import banner from "../Assets/images/banner.png"
@@ -10,6 +9,9 @@ import restaurant_icon from "../Assets/svgs/restaurant.svg";
 import edit_icon from "../Assets/svgs/edit.svg";
 import Axios from "../helpers/axios";
 import ReviewsProfile from "../Components/Profile/Reviews";
+import CommentsProfile from "../Components/Profile/Comments";
+import RestaurantsProfile from "../Components/Profile/Restaurants";
+import EditProfile from "../Components/Profile/EditProfile";
 
 
 const BannerWrapper = styled.div`
@@ -206,9 +208,9 @@ const Profile = () => {
                     <Middle>
                         <Switch>
                             <Route path="/profile/reviews" render={() => <ReviewsProfile user_id={user.id}/>} exact/>
-                            <Route path="/profile/comments" render={() => <h1>2</h1>} exact/>
-                            <Route path="/profile/restaurants" component={ReviewsProfile} exact/>
-                            <Route path="/profile/edit" component={Home} exact/>
+                            <Route path="/profile/comments" render={() => <CommentsProfile user_id={user.id}/>} exact/>
+                            <Route path="/profile/restaurants" render={() => <RestaurantsProfile user_id={user.id}/>} exact/>
+                            <Route path="/profile/edit" component={EditProfile} exact/>
                         </Switch>
                     </Middle>
                     <Right>

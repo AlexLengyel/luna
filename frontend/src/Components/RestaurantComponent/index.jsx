@@ -32,7 +32,7 @@ const StarsWrapper = styled.div`
 
 const RestaurantComponent = (props) => {
     return (
-        <Link to={"/restaurant"} style={{"textDecoration": "none"}}>
+        <Link to={`/restaurant/${props.restaurant.id}`} style={{"textDecoration": "none"}}>
             <ListWrapperRestaurant>
                 <ListLine/>
                 <h1>{props.restaurant.name}</h1>
