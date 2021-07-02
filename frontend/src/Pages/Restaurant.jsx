@@ -181,8 +181,8 @@ const Restaurant = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector((state) => state.restaurant);
     const reviews = useSelector((state) => state.review);
-
     let { id } = useParams();
+    
     useEffect(() => {
 
         async function fetchRestaurant() {
