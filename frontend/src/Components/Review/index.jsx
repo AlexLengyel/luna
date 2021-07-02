@@ -74,21 +74,22 @@ img {
   width: 66px;
 }
 .stars {
-    padding: 20px 10px;
+    padding: 30px 10px;
     width: 30%;
     height: 100%;
-    padding-right: 40%;
+    padding-right: 30%;
 }
 
 .created {
+    width: 20%;
     padding-top: 1%;
     padding-right: 1%;
-    font-size: ${props => props.theme.textSizeM};
+    font-size: ${props => props.theme.textSizeS};
 }
 
 .user {
   height: 100%;
-  width: 145px;
+  width: 35%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -106,21 +107,20 @@ img {
 `
 
 const ReviewComponent = ({review}) => {
-
-    console.log(review.rating)
+    const created = new Date(review.created)
     return (
       <> {review &&
         <ReviewWrapper>
               <Header>
                   <img src={mock_image} alt={"restaurant"}/>
                   <div className={"user"}>
-                      <h1>{review.user.first_name}{review.user.last_name}</h1>
+                      <h1>{review.user.first_name} {review.user.last_name}</h1>
                       <h2>{review.user.user_reviews} Reviews in total</h2>
                   </div>
                   <div className={"stars"}>
-                      <StarSystem rating={`${review.rating}`}/>
+                      <StarSystem rating={review.rating}/>
                   </div>
-                  <p className={"created"}>{review.created}</p>
+                  <p className={"created"}>{created.toLocaleDateString()} {created.toLocaleTimeString()}</p>
               </Header>
               <ReviewContent>
                   <p>{review.content}</p>

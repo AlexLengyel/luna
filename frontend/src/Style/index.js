@@ -44,6 +44,7 @@ export const defaultTheme = {
     lightSilver: '#D8D8D8',
     grey94: '#F0F0F0',
     yellow: '#F8E71C',
+    whitesmoke: "#F5F5F5",
 
     // Sizes
     controlHeight: '40px',

@@ -42,7 +42,7 @@ const InfoTab = styled.div`
     justify-content: space-around;
     align-items: flex-start;
     flex-direction: column; 
-    margin: 5vw;
+    margin: 5vw 10%;
     
     .stars {
         display: flex;
@@ -117,12 +117,11 @@ const SearchBar = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 2%;
 
   input {
     border: none;
     outline: none;
-    width: 40%;
+    width: 100%;
   }
 `
 
@@ -224,7 +223,7 @@ const Restaurant = () => {
     }
 
     const editHandler = () =>{
-        history.push("/createrestaurant");
+        history.push("/");
     }
     
     return(
@@ -234,10 +233,10 @@ const Restaurant = () => {
                 <Uppercontainer>
                     <BannerWrapper>
                         <InfoTab>
-                            <h1>{restaurant ? restaurant.name : 'loading'}</h1>
+                            <h1>{restaurant.name}</h1>
                             <h2>{restaurant.category}</h2>
                             <div className={"stars"}>
-                                <StarSystem rating={`${restaurant.average.rating}`}/>
+                                <StarSystem rating={restaurant.average.rating}/>
                                 <p>{restaurant.review_count} reviews</p>
                             </div>
                         </InfoTab>
