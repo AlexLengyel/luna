@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {Button} from "../Style/GlobalButtons";
+import { Button } from "../Style/GlobalButtons";
 import Title from "../Components/BaseTitle";
-import {BaseInput} from "../Components/BaseInput";
-import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {useState} from "react";
+import { BaseInput } from "../Components/BaseInput";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import Axios from "../helpers/axios";
 
 const FormWrapper = styled.form`
@@ -34,10 +34,15 @@ const ButtonWrapper = styled.div`
   margin-top: 7vh;
 `
 
-const LogingButton = styled(Button)`
-  width: 14vw;
-  min-width: 100px;
-`
+const LoginButton = styled(Button)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 200px;
+    border-radius: 28px;
+    border: none;
+    `
 
 
 const Login = () => {
