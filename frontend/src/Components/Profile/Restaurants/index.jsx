@@ -27,11 +27,13 @@ const Wrapper = styled.div`
 
 const RestaurantProfile = (props) => {
     return (
-        <Wrapper>
-            <h1>{props.restaurant.name}</h1>
-            <StarSystem rating={props.restaurant.average.rating}/>
-            <span>{props.restaurant.country} </span>
-        </Wrapper>
+        <Link to={"/restaurant/props.restaurant.id"}>
+            <Wrapper>
+                <h1>{props.restaurant.name}</h1>
+                <StarSystem rating={props.restaurant.average.rating}/>
+                <span>{props.restaurant.country} </span>
+            </Wrapper>
+        </Link>
     )
 }
 
@@ -71,7 +73,7 @@ const RestaurantsProfile = (props) => {
                 "marginTop": "30px",
                 "marginBottom": "20px"
             }}>
-                <Link to={"/createRestaurant"}>
+                <Link to={"/restaurant/new"}>
                     <Button style={{"borderRadius": "28px", "width": "180px"}}>Create Restaurant</Button>
                 </Link>
             </div>
