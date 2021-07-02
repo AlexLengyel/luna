@@ -69,7 +69,7 @@ const Navigation = () => {
     history.push("/search/restaurants");
   }
   const profileBtnHandler = () => {
-    history.push("/profile");
+    history.push("/profile/reviews");
   }
   const signupBtnHandler = () => {
     history.push("/registration");
@@ -89,11 +89,27 @@ const Navigation = () => {
         <NavBarMain>
             <LogoWrapper src={Logo}/>
             <NavBarRight>
-                <NavButton onClick={homeBtnHandler} borderBottom={location.pathname === "/" ? "3px solid #E47D31" : "3px solid transparent"}>Home</NavButton>
-                <NavButton onClick={searchBtnHandler} borderBottom={location.pathname === "/search/restaurants" ? "3px solid #E47D31" : "3px solid transparent"}>Search</NavButton>
-                <NavButton onClick={profileBtnHandler} borderBottom={location.pathname === "/profile" ? "3px solid #E47D31" : "3px solid transparent"} >Profile</NavButton>
-                <SignUpButton onClick={signupBtnHandler}>SIGN UP</SignUpButton>
-                <LoginButton onClick={LogHandler}>{localStorage.token ? "LOG OUT" : "LOG IN"}</LoginButton>
+                <NavButton onClick={homeBtnHandler}
+                borderBottom={location.pathname === "/" ? "3px solid #E47D31" : "3px solid transparent"}>
+                  Home
+                </NavButton>
+
+                <NavButton onClick={searchBtnHandler}
+                borderBottom={location.pathname === "/search/restaurants" ? "3px solid #E47D31" : "3px solid transparent"}>
+                  Search
+                </NavButton>
+
+                <NavButton onClick={profileBtnHandler} borderBottom={location.pathname === "/profile" ? "3px solid #E47D31" : "3px solid transparent"}>
+                  {localStorage.token ? "Profile" : ""}
+                </NavButton>
+                {localStorage.token ? "":
+                <SignUpButton onClick={signupBtnHandler}>
+                   SIGN UP
+                </SignUpButton>}
+
+                <LoginButton onClick={LogHandler}>
+                  {localStorage.token ? "LOG OUT" : "LOG IN"}
+                </LoginButton>
             </NavBarRight>
         </NavBarMain>
     )

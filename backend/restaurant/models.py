@@ -25,7 +25,7 @@ class Restaurant(models.Model):
     zip = models.CharField(max_length=10, validators=[
         RegexValidator(r'^[ 0-9]+$'), MinLengthValidator(4)
     ])
-    opening_hours = models.CharField(max_length=50)
+    opening_hours = models.CharField(max_length=50, default="")
     website = models.URLField(max_length=100, blank=True, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Phone number must be entered in the format: '+999999999'. "
