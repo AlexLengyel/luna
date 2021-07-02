@@ -2,6 +2,7 @@ import mock_image from "../../Assets/images/mock_image.png";
 import styled from "styled-components";
 import {Button} from "../../Style/GlobalButtons";
 import like_icon from "../../Assets/svgs/like.svg"
+import avatar from "../../Assets/svgs/avatar.svg"
 import StarSystem from "../StarSystem"
 
 
@@ -71,7 +72,8 @@ justify-content: space-between;
 flex-direction: row;
 
 img {
-  width: 66px;
+  width: 60px;
+  padding: 1% 1%;
 }
 .stars {
     padding: 30px 10px;
@@ -112,7 +114,7 @@ const ReviewComponent = ({review}) => {
       <> {review &&
         <ReviewWrapper>
               <Header>
-                  <img src={mock_image} alt={"restaurant"}/>
+                  {review.user.profile_picture? <img src={review.user.profile_picture} alt={"userprofile"}/> : <img src={avatar} alt={"userprofile"}/>}
                   <div className={"user"}>
                       <h1>{review.user.first_name} {review.user.last_name}</h1>
                       <h2>{review.user.user_reviews} Reviews in total</h2>
