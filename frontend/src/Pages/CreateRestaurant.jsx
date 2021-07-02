@@ -126,16 +126,15 @@ const CreateRestaurant = () => {
         try {
             const resp = await Axios.post(url, formdata, config);
             if (resp.status === 200) {
-
-              history.push("/restaurant/");
+              history.push("/profile/restaurants");
             }
           } catch (err) {
             if (err) {
               console.log(err.response);
             }
         }
-    } 
-    
+    }
+
     return(
         <CreateRestaurantWrapper>
             <Title titlename="CREATE NEW RESTAURANT" linelength="200px" height="10vh"/>
@@ -167,9 +166,9 @@ const CreateRestaurant = () => {
                         <option value="Austria">Austria</option>
                         <option value="Germany">Germany</option>
                         <option value="Italy">Italy</option>
-                    </SelectInput>                
+                    </SelectInput>
                 </InputWrapper>
-                <InputWrapper> 
+                <InputWrapper>
                     <SectionTitle>Address</SectionTitle>
                     <InputTitle>Street *</InputTitle>
                     <BaseInput placeholder='' {...register("street", { required: true })} />
@@ -211,14 +210,14 @@ const CreateRestaurant = () => {
                     </SelectInput>
                 </InputWrapper>
                 <InputWrapper>
-                    <InputTitle>Image</InputTitle>                       
+                    <InputTitle>Image</InputTitle>
                     <UploadButton>
                         <UploadLabel>
-                            <input hidden type="file" accept="image/png, image/jpg" onChange={onImageChangeHandler}/>                    
+                            <input hidden type="file" accept="image/png, image/jpg" onChange={onImageChangeHandler}/>
                             CHOOSE A FILE...
                         </UploadLabel>
                     </UploadButton>
-                </InputWrapper>       
+                </InputWrapper>
             </InputSection>
             <ButtonWrapper>
                 <SubmitButton type="submit" value="Submit" form="form1">

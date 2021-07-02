@@ -7,108 +7,108 @@ import phone from "../Assets/svgs/phone.svg"
 import laptop from "../Assets/svgs/laptop.svg"
 import screenshot from "../Assets/svgs/screenshot.svg"
 import StarSystem from "../Components/StarSystem"
-import { Button } from "../Style/GlobalButtons"
-import { RestaurantsWrapper } from "../Style/container"
-import { useHistory, useParams} from "react-router-dom"
+import {Button} from "../Style/GlobalButtons"
+import {RestaurantsWrapper} from "../Style/container"
+import {useHistory, useParams} from "react-router-dom"
 import ReviewComponent from "../Components/Review"
-import { useEffect } from "react";
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import Axios from "../helpers/axios";
 
 
 const Uppercontainer = styled.div`
-    height: 40vh;
-    background-image: url(${laederach});
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    display: flex;
-    align-items: top;
-    justify-content: center;
+  height: 40vh;
+  background-image: url(${props => props.banner});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 const BannerWrapper = styled.div`
-    height: 20vh;
-    width: 100%;
-    background-color: rgb(0,0,0,0.5);
+  height: 20vh;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const InfoTab = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 5vw 10%;
+
+  .stars {
     display: flex;
     justify-content: space-between;
     align-items: center;
-`
-const InfoTab = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-direction: column; 
-    margin: 5vw 10%;
-    
-    .stars {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-     
-        p{
-            color: ${(props)=> props.theme.backgroundWhite};
-            font-weight: ${(props)=> props.theme.textWeightThin};
-        }
-        
+
+    p {
+      color: ${(props) => props.theme.backgroundWhite};
+      font-weight: ${(props) => props.theme.textWeightThin};
     }
 
-    h1 {
-        color: ${(props)=> props.theme.backgroundWhite};
-        font-size: ${(props)=> props.theme.textSizeXXL};
-        font-weight: ${(props)=> props.theme.textWeightBold};
-    
-    }
+  }
 
-    h2 {
-        color: ${(props)=> props.theme.backgroundWhite};
-        font-size: ${(props)=> props.theme.textSizeXL};
-        font-weight: ${(props)=> props.theme.textWeightThin};
-        padding-top: 1%;
-    }
+  h1 {
+    color: ${(props) => props.theme.backgroundWhite};
+    font-size: ${(props) => props.theme.textSizeXXL};
+    font-weight: ${(props) => props.theme.textWeightBold};
 
-    
+  }
+
+  h2 {
+    color: ${(props) => props.theme.backgroundWhite};
+    font-size: ${(props) => props.theme.textSizeXL};
+    font-weight: ${(props) => props.theme.textWeightThin};
+    padding-top: 1%;
+  }
+
+
 `
 
 const LocationTab = styled.div`
-    width: 40%;
-    min-width: 200px;
-    height: 170%;
-    max-height: 140%
-    min-height: 200px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; 
-    margin-top: 10%;
-    margin-right: 5vw;  
+  width: 40%;
+  min-width: 200px;
+  height: 170%;
+  max-height: 140%;
+  min-height: 200px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10%;
+  margin-right: 5vw;
 
-    p {
-        font-size: 16px
-    }
-    img {
-        height: 80%;
-        width: auto;
-    }
+  p {
+    font-size: 16px
+  }
+
+  img {
+    height: 80%;
+    width: auto;
+  }
 
 `
 const Map = styled.div`
-    height: 50%;
-    background-image: url(${screenshot});
+  height: 50%;
+  background-image: url(${screenshot});
 `
 const Leftcontainer = styled.div`
-    width: 50%;
+  width: 50%;
 `
 
 const Rightcontainer = styled.div`
-    width: 50%;
-    height: 40vh;
-    display: flex;
-    justify-content: center;
-    flex-direction column;
+  width: 50%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `
 
 const SearchBar = styled.form`
@@ -131,11 +131,11 @@ const FilterButton = styled(Button)`
 const InfoWrapper = styled.div`
   width: 80%;
   margin-left: 10%;
-  height: 40vh; 
+  height: 40vh;
   background-color: ${(props) => props.theme.whitesmoke}
   display: flex;
   justify-content: center;
-  `
+`
 const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -151,7 +151,7 @@ const EditDataBtn = styled(Button)`
   border-radius: 28px;
   width: 40%;
 
-` 
+`
 
 const DetailInfoWrapper = styled.div`
   display: grid;
@@ -159,11 +159,11 @@ const DetailInfoWrapper = styled.div`
   padding: 2% 5%;
 
   p {
-      font-weight: ${(props)=> props.theme.textWeightThin}
+    font-weight: ${(props) => props.theme.textWeightThin}
   }
 `
 const DetailWrapperBorder = styled(DetailInfoWrapper)`
-    border-top: ${(props)=> props.theme.lightSilver} 1px solid;
+  border-top: ${(props) => props.theme.lightSilver} 1px solid;
 
 `
 
@@ -181,56 +181,78 @@ const Restaurant = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector((state) => state.restaurant);
     const reviews = useSelector((state) => state.review);
-    let { id } = useParams();
-    
+    const [user, setUser] = useState(null);
+    let {id} = useParams();
+
     useEffect(() => {
 
         async function fetchRestaurant() {
-          const url_restaurant = `/restaurants/${id}/`;
-          const url_reviews = `/reviews/restaurant/${id}/`;
-          const config = {
-            headers: { Authorization: `Bearer ${token}`},
-          };
-          try {
-            const resp = await Axios.get(url_restaurant, config);
-            if (resp.status === 200) {
-                dispatch({
-                    type: "setRestaurant",
-                    payload: resp.data,
-                  });
-            }
-            const reviewresp = await Axios.get(url_reviews, config);
-            if (reviewresp.status === 200) {
-                dispatch({
-                    type: "setReview",
-                    payload: reviewresp.data,
-                  });
-            }
+            const url_restaurant = `/restaurants/${id}/`;
+            const url_reviews = `/reviews/restaurant/${id}/`;
+            const config = {
+                headers: {Authorization: `Bearer ${token}`},
+            };
+            try {
+                const resp = await Axios.get(url_restaurant, config);
+                if (resp.status === 200) {
+                    dispatch({
+                        type: "setRestaurant",
+                        payload: resp.data,
+                    });
+                }
+                const reviewresp = await Axios.get(url_reviews, config);
+                if (reviewresp.status === 200) {
+                    dispatch({
+                        type: "setReview",
+                        payload: reviewresp.data,
+                    });
+                }
 
-          } catch (err) {
-            if (err.response.status === 400) {
-                console.log(err.response);
-              }      
-          }
+            } catch (err) {
+                if (err.response.status === 400) {
+                    console.log(err.response);
+                }
+            }
         }
+
+
         fetchRestaurant();
-      }, [dispatch, token]);
+    }, [dispatch, token, id]);
 
+    useEffect(() => {
+        async function fetchUser() {
+            const url = "me/";
+            const config = {
+                headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+            };
+            try {
+                const resp = await Axios.get(url, config);
+                if (resp.status === 200) {
+                    setUser(resp.data);
+                }
+            } catch (err) {
+                if (err.response.status === 400) {
+                    console.log(err.response);
+                }
+            }
+        }
 
+        fetchUser()
+    }, [token]);
 
-    const reviewHandler = () =>{
+    const reviewHandler = () => {
+        history.push("/new_review");
+    }
+
+    const editHandler = () => {
         history.push("/");
     }
 
-    const editHandler = () =>{
-        history.push("/");
-    }
-    
-    return(
+    return (
         <>
-        {restaurant &&
+            {restaurant && user &&
             <div>
-                <Uppercontainer>
+                <Uppercontainer banner={restaurant.image ? restaurant.image : laederach}>
                     <BannerWrapper>
                         <InfoTab>
                             <h1>{restaurant.name}</h1>
@@ -246,10 +268,10 @@ const Restaurant = () => {
                                 <img src={pin} alt="pin"/><p>{restaurant.street}</p>
                             </DetailInfoWrapper>
                             <DetailInfoWrapper>
-                                <img src={phone} alt="phone"/><p>{restaurant.phone_number}</p> 
+                                <img src={phone} alt="phone"/><p>{restaurant.phone_number}</p>
                             </DetailInfoWrapper>
                             <DetailInfoWrapper>
-                                <img src={laptop} alt="laptop"/>  <p>{restaurant.website}</p>  
+                                <img src={laptop} alt="laptop"/>  <p>{restaurant.website}</p>
                             </DetailInfoWrapper>
                         </LocationTab>
                     </BannerWrapper>
@@ -262,7 +284,7 @@ const Restaurant = () => {
                             </SearchBar>
                             <FilterButton>Filter</FilterButton>
                         </SearchHeader>
-                        { reviews && reviews.length > 0 ? reviews.map((review) => {
+                        {reviews && reviews.length > 0 ? reviews.map((review) => {
                             return (
                                 <ReviewComponent review={review}/>
                             );
@@ -274,15 +296,15 @@ const Restaurant = () => {
                                 <img src={clock} alt="clock"/> <p>{restaurant.opening_hours}</p>
                             </DetailInfoWrapper>
                             <DetailWrapperBorder>
-                                <img src={money} alt="money"/> <p>{restaurant.price_level === 1? "$": restaurant.price_level === 2? "$$": "$$$" }</p>
+                                <img src={money} alt="money"/> <p>{restaurant.price_level === 1 ? "$" : restaurant.price_level === 2 ? "$$" : "$$$"}</p>
                             </DetailWrapperBorder>
-                            <ButtonWrapper>
-                                <WriteReviewBtn onClick={reviewHandler} >WRITE A REVIEW</WriteReviewBtn>
-                                <EditDataBtn onClick={editHandler}>EDIT DATA</EditDataBtn>
+                            <ButtonWrapper style={{"display": localStorage.token ? "flex" : "none"}}>
+                                <WriteReviewBtn onClick={reviewHandler}>WRITE A REVIEW</WriteReviewBtn>
+                                <EditDataBtn onClick={editHandler} style={{"display": user.id === restaurant.owner ? "block" : "none"}}>EDIT DATA</EditDataBtn>
                             </ButtonWrapper>
                         </InfoWrapper>
                     </Rightcontainer>
-                </RestaurantsWrapper>  
+                </RestaurantsWrapper>
             </div>}
         </>
     )
