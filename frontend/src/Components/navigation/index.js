@@ -69,7 +69,7 @@ const Navigation = () => {
     history.push("/search/restaurants");
   }
   const profileBtnHandler = () => {
-    history.push("/profile");
+    history.push("/profile/reviews");
   }
   const signupBtnHandler = () => {
     history.push("/registration");

@@ -21,7 +21,7 @@ class RegistrationView(CreateAPIView):
         new_registration = Registration(user=new_user)
         new_registration.save()
         send_mail(
-            'Thank you for signing up for Motion!',
+            'Thank you for signing up for Luna!',
             f'Here is your e-mail validation code: {new_registration.code}. You will need it to create a new profile.',
             DEFAULT_FROM_EMAIL,
             [request.data['email']],
@@ -74,7 +74,7 @@ class PasswordResetView(CreateAPIView):
             registration.is_used = False
             registration.save()
             send_mail(
-                'Motion password reset',
+                'Luna password reset',
                 f'Here is your password reset code: {new_code}. You will need it to change your password.',
                 DEFAULT_FROM_EMAIL,
                 [request.data['email']],
@@ -83,8 +83,8 @@ class PasswordResetView(CreateAPIView):
         else:
             registration.save()
             send_mail(
-                'Thank you for signing up for Motion!',
-                f'Here is your e-mail validation code: {registration.code}. You will need it to create a new profile.',
+                'Luna password reset',
+                f'Here is your password reset code: {registration.code}. You will need it to change your password.',
                 DEFAULT_FROM_EMAIL,
                 [request.data['email']],
                 fail_silently=False,

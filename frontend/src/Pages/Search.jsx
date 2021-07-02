@@ -1,11 +1,12 @@
 import {Link, Route, Switch, useLocation} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import RestaurantComponent from "../Components/RestaurantComponent";
 import {RestaurantsWrapper} from "../Style/container";
 import ReviewsSearchComponent from "../Components/Search/ReviewsSearch";
 import UserSearchComponent from "../Components/Search/UsersSearch";
 import styled from "styled-components";
 import arrow from "../Assets/svgs/arrow.svg"
+import Axios from "../helpers/axios";
 
 
 const SearchBar = styled.div`
@@ -93,17 +94,76 @@ const Line = styled.div`
 `
 
 const Search = () => {
-
+    const [restaurants, setRestaurants] = useState(null);
+    const [reviews, setReviews] = useState(null);
+    const [users, setUsers] = useState(null);
     const location = useLocation();
 
+   useEffect(() => {
+        if (location.pathname === "/search/restaurants") {
+            async function fetchRestaurants() {
+                const url = "restaurants/";
+                try {
+                    const resp = await Axios.get(url);
+                    if (resp.status === 200) {
+                        setRestaurants(resp.data);
+                    }
+                } catch (err) {
+                    if (err.response.status === 400) {
+                        console.log(err.response);
+                    }
+                }
+            }
+        fetchRestaurants();
+        }
+        if (location.pathname === "/search/reviews") {
+            async function fetchReviews() {
+                const url = "reviews/";
+                try {
+                    const resp = await Axios.get(url);
+                    if (resp.status === 200) {
+                        setReviews(resp.data);
+                    }
+                } catch (err) {
+                    if (err.response.status === 400) {
+                        console.log(err.response);
+                    }
+                }
+            }
+        fetchReviews();
+        }
+        if (location.pathname === "/search/users") {
+            async function fetchUsers() {
+                const url = "users/";
+                try {
+                    const resp = await Axios.get(url);
+                    if (resp.status === 200) {
+                        setUsers(resp.data);
+                    }
+                } catch (err) {
+                    if (err.response.status === 400) {
+                        console.log(err.response);
+                    }
+                }
+            }
+        fetchUsers();
+        }
+
+    }, [location.pathname]);
+
     const onChangeHandlerCategory = (event) => {
+        console.log(event)
+    }
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
         console.log(event)
     }
 
     return (
         <>
             <SearchBar>
-                <SearchBarLeft>
+                <SearchBarLeft onSubmit={onSubmitHandler}>
                     <input type={"text"} placeholder={"Search"}/>
                 </SearchBarLeft>
                 <SearchBarRight>
@@ -134,55 +194,29 @@ const Search = () => {
                 <Switch>
                     <Route path="/search/restaurants"
                            render={() =>
-                               <>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                                   <RestaurantComponent/>
-                               </>
+                               restaurants
+                               ?
+                               restaurants.map((item,index) => <RestaurantComponent key={`${index}-${item.name}`} restaurant={item}/>)
+                               :
+                               <h1>No entries found!</h1>
                            }
                            exact/>
                     <Route path="/search/reviews"
                            render={() =>
-                               <>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                                   <ReviewsSearchComponent/>
-                               </>
+                               reviews
+                               ?
+                               reviews.map((item,index) => <ReviewsSearchComponent key={`${index}-${item.name}`} review={item}/>)
+                               :
+                               <h1>No entries found!</h1>
                            }
                            exact/>
                     <Route path="/search/users"
                            render={() =>
-                               <>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                                   <UserSearchComponent/>
-                               </>
+                               users
+                               ?
+                               users.map((item,index) => <UserSearchComponent key={`${index}-${item.name}`} user={item}/>)
+                               :
+                               <h1>No entries found!</h1>
                            }
                            exact/>
                 </Switch>
