@@ -34,9 +34,14 @@ const ButtonWrapper =styled.div`
     margin-top: 7vh;
     `
 
-const LogingButton = styled(Button)`
-    width: 14vw;
-    min-width: 100px;
+const LoginButton = styled(Button)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 200px;
+    border-radius: 28px;
+    border: none;
     `
 
 
@@ -95,9 +100,9 @@ const Login = () => {
                 <BaseInput placeholder='Password' type='password' required= 'This field is required' onChange={onPasswordChange}/>
             </InputWrapper>
             <ButtonWrapper>
-                <LogingButton onClick={onHandleSubmit}>
+                <LoginButton onClick={onHandleSubmit}>
                      Login
-                </LogingButton>
+                </LoginButton>
             </ButtonWrapper>
         </FormWrapper>
     )
