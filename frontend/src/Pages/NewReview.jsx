@@ -103,6 +103,7 @@ const NewReview = () => {
         }
         try {
             await Axios.post(url, body, config);
+            setContent("Thank you for your review");
         } catch (error) {
             console.log(error);
             setContent("Owner can not create a review of his/her restaurant");
@@ -118,7 +119,7 @@ const NewReview = () => {
                             <h1>{restaurant.name}</h1>
                             <h2>{restaurant.categories[0].name}</h2>
                             <div className={"stars"}>
-                                <StarSystem rating={`${parseInt(restaurant.average.rating)}`}/>
+                                <StarSystem rating={restaurant.average.rating}/>
                                 <p>{restaurant.review_count} reviews</p>
                             </div>
                         </> : null

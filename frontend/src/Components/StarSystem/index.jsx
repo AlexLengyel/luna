@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `
 
 const StarSystem = (props) => {
-    switch (props.rating) {
+    switch (parseInt(props.rating)) {
         case 10:{
             return (
                 <Wrapper>
